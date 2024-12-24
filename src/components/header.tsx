@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { RollingText } from "./text";
 
 const Header = () => {
   const renderMenu = () => (
@@ -28,7 +29,9 @@ const Header = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light z-40 hidden w-full md:block">
         <div className="container mx-auto flex w-full flex-row justify-between py-4">
           <div className="w-1/4">
-            <a href="#info">info</a>
+            <a href="#info">
+              <RollingText text="info" />
+            </a>
           </div>
 
           <div className="flex w-1/2 flex-row items-center justify-between">
@@ -40,7 +43,9 @@ const Header = () => {
           </div>
 
           <div className="w-1/4 text-right">
-            <a href="#projects">projects</a>
+            <a href="#projects">
+              <RollingText text="projects" />
+            </a>
           </div>
         </div>
       </nav>

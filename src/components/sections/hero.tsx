@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 import { Avatar, Banner } from "../branding";
 import Header from "../header";
-import { RollingText } from "../rolling-text";
+import { HackerText } from "../text";
 import { Button } from "../ui/button";
 import { WireframeLine } from "../lines";
 
@@ -56,7 +56,7 @@ const Hero = () => {
             {/* Title */}
             <div className="flex flex-col">
               <span className="pb-0.5 text-sm text-gray-400">Hello World.</span>
-              <RollingText
+              <HackerText
                 text="My name is Finn."
                 className="text-5xl drop-shadow-[0px_0px_2px_rgba(255,255,255,0.75)] lg:whitespace-nowrap"
               />
