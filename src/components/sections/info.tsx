@@ -163,7 +163,10 @@ const Info = () => {
                 <motion.span
                   key={selected}
                   custom={1}
-                  variants={variants}
+                  variants={{
+                    initial: { opacity: 0 },
+                    animate: { opacity: 1 },
+                  }}
                   initial="initial"
                   animate={isInView ? "animate" : "initial"}
                   transition={transition}
