@@ -1,5 +1,11 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { AnimatePresence, Variants, motion, useInView } from "motion/react";
+import {
+  AnimatePresence,
+  Variants,
+  motion,
+  useAnimationFrame,
+  useInView,
+} from "motion/react";
 import { useRef, useState } from "react";
 
 import Image from "next/image";
@@ -8,12 +14,14 @@ import { CrosshairIcons } from "@/components/icons/CrosshairIcon";
 import { CrossedLines, WireframeLine } from "@/components/lines";
 import { SectionTitle, StaggeredText } from "@/components/text";
 import { Button } from "@/components/ui/button";
+
+import useMousePosition from "@/hooks/useMousePosition";
 import { cn } from "@/lib/utils";
 
 const variants: Variants = {
-  initial: (direction) => ({ opacity: 0, y: direction === 1 ? 25 : -25 }),
+  initial: { opacity: 0, y: -10 },
   animate: { opacity: 1, y: 0 },
-  exit: (direction) => ({ opacity: 0, y: direction === 1 ? -25 : 25 }),
+  exit: { opacity: 0, y: -10 },
 };
 
 const transition = {
@@ -60,11 +68,31 @@ const renderTitle = (className: string) => (
 );
 
 const Info = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { amount: 1 });
+
+  const { x, y } = useMousePosition();
 
   const [selected, setSelected] = useState(0);
   const [direction, setDirection] = useState(1); // 1 for next, -1 for prev
+  const item = content[selected];
+
+  useAnimationFrame(() => {
+    // track the position of the mouse relative to the ref
+    if (!ref.current) return;
+
+    const constrain = 50;
+    const {
+      width,
+      height,
+      y: refY,
+      x: refX,
+    } = ref.current.getBoundingClientRect();
+    const calcX = -(y - refY - height / 2) / constrain;
+    const calcY = (x - refX - width / 2) / constrain;
+
+    ref.current.style.transform = `perspective(500px) rotateX(${calcX}deg) rotateY(${calcY}deg)`;
+  });
 
   const handleNext = () => {
     setDirection(1);
@@ -88,8 +116,6 @@ const Info = () => {
     setSelected(selected - 1);
   };
 
-  const item = content[selected];
-
   return (
     <>
       <CrossedLines />
@@ -99,72 +125,70 @@ const Info = () => {
         <CrosshairIcons />
 
         {/* Content container */}
-        <AnimatePresence mode="wait">
+        <div className="flex grow flex-col items-center justify-between gap-4 md:flex-row md:px-2">
+          {/* Small screen section title */}
+          {renderTitle("md:hidden block w-full mx-0")}
+
+          {/* Image container */}
           <div
             ref={ref}
-            className="flex grow flex-col items-center justify-between gap-4 md:flex-row md:px-2"
+            className="w-3/4 translate-x-40 rounded-lg bg-[var(--foreground)] md:w-1/2 xl:w-[40%]"
           >
-            {/* Small screen section title */}
-            {renderTitle("md:hidden block w-full mx-0")}
-
-            {/* Image container */}
-            <motion.div
-              key={selected}
-              custom={direction}
-              variants={variants}
-              initial="initial"
-              animate={isInView ? "animate" : "initial"}
-              exit="exit"
-              transition={transition}
-              className="w-3/4 rounded-lg bg-[var(--foreground)] md:w-1/2 xl:w-[40%]"
-            >
-              <div className="flex flex-row justify-between px-2 pt-2 text-[var(--background)]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selected}
+                custom={direction}
+                variants={variants}
+                initial="initial"
+                animate={isInView ? "animate" : "initial"}
+                exit="exit"
+                transition={transition}
+                className="flex flex-row justify-between px-2 pt-2 text-[var(--background)]"
+              >
                 <p>{`[${item.tag}]`}</p>
 
                 <p>{item.num}</p>
+              </motion.div>
+            </AnimatePresence>
+
+            <Image alt={item.alt} src={item.img} width={1000} height={1000} />
+          </div>
+
+          {/* Text container */}
+          <div className="z-10 h-full w-3/4 md:w-[40%]">
+            {renderTitle("hidden md:block")}
+
+            <StaggeredText key={selected} className="text-lg">
+              {item.text}
+            </StaggeredText>
+
+            <div className="flex items-center justify-between pt-8">
+              <div className="flex items-center gap-4">
+                <Button variant="outline" size="icon" onClick={handlePrev}>
+                  <ArrowLeft />
+                </Button>
+
+                <Button variant="outline" size="icon" onClick={handleNext}>
+                  <ArrowRight />
+                </Button>
               </div>
-              <div className="aspect-auto w-full"></div>
 
-              <Image alt={item.alt} src={item.img} width={1000} height={1000} />
-            </motion.div>
-
-            {/* Text container */}
-            <div className="z-10 h-full w-3/4 md:w-[40%]">
-              {renderTitle("hidden md:block")}
-
-              <StaggeredText key={selected} className="text-lg">
-                {item.text}
-              </StaggeredText>
-
-              <div className="flex items-center justify-between pt-8">
-                <div className="flex items-center gap-4">
-                  <Button variant="outline" size="icon" onClick={handlePrev}>
-                    <ArrowLeft />
-                  </Button>
-
-                  <Button variant="outline" size="icon" onClick={handleNext}>
-                    <ArrowRight />
-                  </Button>
-                </div>
-
-                <motion.span
-                  key={selected}
-                  custom={1}
-                  variants={{
-                    initial: { opacity: 0 },
-                    animate: { opacity: 1 },
-                  }}
-                  initial="initial"
-                  animate={isInView ? "animate" : "initial"}
-                  transition={transition}
-                  className="text-sm font-thin text-gray-300"
-                >
-                  - [Finn Formica]
-                </motion.span>
-              </div>
+              <motion.span
+                key={selected}
+                variants={{
+                  initial: { opacity: 0 },
+                  animate: { opacity: 1 },
+                }}
+                initial="initial"
+                animate={isInView ? "animate" : "initial"}
+                transition={transition}
+                className="text-sm font-thin text-gray-300"
+              >
+                - [Finn Formica]
+              </motion.span>
             </div>
           </div>
-        </AnimatePresence>
+        </div>
 
         <CrosshairIcons />
       </div>
