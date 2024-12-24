@@ -4,13 +4,11 @@ import { useRef, useState } from "react";
 
 import Image from "next/image";
 
-import { outerSans } from "@/fonts";
+import { CrosshairIcons } from "@/components/icons/CrosshairIcon";
+import { CrossedLines, WireframeLine } from "@/components/lines";
+import { SectionTitle, StaggeredText } from "@/components/text";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-import { CrosshairIcon } from "../icons/CrosshairIcon";
-import { WireframeLine } from "../lines";
-import { HackerText, StaggeredText } from "../text";
-import { Button } from "../ui/button";
 
 const variants: Variants = {
   initial: (direction) => ({ opacity: 0, y: direction === 1 ? 25 : -25 }),
@@ -54,26 +52,16 @@ const content = [
   },
 ];
 
-const renderCrosshairIcons = () => (
-  <div className="flex h-40 items-center justify-between px-4 md:px-0">
-    <CrosshairIcon />
-    <CrosshairIcon />
-  </div>
-);
-
 const renderTitle = (className: string) => (
-  <HackerText
+  <SectionTitle
     text="info"
-    className={cn(
-      `${outerSans.className} mb-8 ml-auto mr-0 max-w-52 border-[1px] border-divider py-4 text-center text-2xl`,
-      className,
-    )}
+    className={cn("mb-8 ml-auto mr-0 max-w-52", className)}
   />
 );
 
 const Info = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref);
+  const isInView = useInView(ref, { amount: 1 });
 
   const [selected, setSelected] = useState(0);
   const [direction, setDirection] = useState(1); // 1 for next, -1 for prev
@@ -104,12 +92,11 @@ const Info = () => {
 
   return (
     <>
-      <WireframeLine orientation="tr" className="md:-translate-x-1/4" />
-      <WireframeLine orientation="tl" className="md:-translate-x-1/4" />
+      <CrossedLines />
       <WireframeLine orientation="h" className="top-1/2" />
 
       <div className="container mx-auto flex h-full flex-col">
-        {renderCrosshairIcons()}
+        <CrosshairIcons />
 
         {/* Content container */}
         <AnimatePresence mode="wait">
@@ -179,7 +166,7 @@ const Info = () => {
           </div>
         </AnimatePresence>
 
-        {renderCrosshairIcons()}
+        <CrosshairIcons />
       </div>
     </>
   );

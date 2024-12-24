@@ -1,10 +1,10 @@
 import { motion } from "motion/react";
 
-import { Avatar, Banner } from "../branding";
-import Header from "../header";
-import { HackerText } from "../text";
-import { Button } from "../ui/button";
-import { WireframeLine } from "../lines";
+import { Avatar, Banner } from "@/components/branding";
+import Header from "@/components/header";
+import { VerticalLines } from "@/components/lines";
+import { HackerText } from "@/components/text";
+import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   const MotionButton = motion.create(Button);
@@ -25,26 +25,7 @@ const Hero = () => {
 
   return (
     <>
-      <WireframeLine
-        orientation="v"
-        className="left-[calc(75%)] hidden md:block"
-      />
-      <WireframeLine
-        orientation="v"
-        className="left-[calc(75%_-_8px)] hidden md:block"
-      />
-
-      <WireframeLine
-        orientation="v"
-        className="left-[calc(25%)] hidden md:block"
-      />
-      <WireframeLine
-        orientation="v"
-        className="left-[calc(25%_-_8px)] hidden md:block"
-      />
-
-      <WireframeLine orientation="v" className="left-[15px]" />
-      <WireframeLine orientation="v" className="left-[calc(100%_-_15px)]" />
+      <VerticalLines />
 
       <div className="hero z-[1px] flex h-full min-h-full flex-col">
         <Header />

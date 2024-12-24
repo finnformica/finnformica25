@@ -1,15 +1,15 @@
 import { Menu } from "lucide-react";
 import Link from "next/link";
 
-import { Initials } from "./branding";
-import { CrosshairIcon } from "./icons/CrosshairIcon";
+import { Initials } from "@/components/branding";
+import { CrosshairIcon } from "@/components/icons/CrosshairIcon";
+import { RollingText } from "@/components/text";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { RollingText } from "./text";
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const renderMenu = () => (

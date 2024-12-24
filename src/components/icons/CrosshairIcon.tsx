@@ -37,3 +37,10 @@ export const CrosshairIcon = ({
     />
   </svg>
 );
+
+export const CrosshairIcons = () => (
+  <div className="flex h-40 items-center justify-between px-4 md:px-0">
+    <CrosshairIcon />
+    <CrosshairIcon />
+  </div>
+);

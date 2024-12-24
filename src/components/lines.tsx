@@ -60,3 +60,35 @@ export const WireframeLine = ({
     </svg>
   );
 };
+
+export const VerticalLines = () => (
+  <>
+    <WireframeLine
+      orientation="v"
+      className="left-[calc(75%)] hidden md:block"
+    />
+    <WireframeLine
+      orientation="v"
+      className="left-[calc(75%_-_8px)] hidden md:block"
+    />
+
+    <WireframeLine
+      orientation="v"
+      className="left-[calc(25%)] hidden md:block"
+    />
+    <WireframeLine
+      orientation="v"
+      className="left-[calc(25%_-_8px)] hidden md:block"
+    />
+
+    <WireframeLine orientation="v" className="left-[15px]" />
+    <WireframeLine orientation="v" className="left-[calc(100%_-_15px)]" />
+  </>
+);
+
+export const CrossedLines = () => (
+  <>
+    <WireframeLine orientation="tr" className="md:-translate-x-1/4" />
+    <WireframeLine orientation="tl" className="md:-translate-x-1/4" />
+  </>
+);

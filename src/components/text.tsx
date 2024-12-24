@@ -1,6 +1,24 @@
-import { cn } from "@/lib/utils";
 import { motion, useInView } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
+import { outerSans } from "@/fonts";
+import { cn } from "@/lib/utils";
+
+export const SectionTitle = ({
+  text,
+  className,
+}: {
+  text: string;
+  className?: string;
+}) => (
+  <HackerText
+    text={text}
+    className={cn(
+      `${outerSans.className} border-[1px] border-divider py-4 text-center text-2xl`,
+      className,
+    )}
+  />
+);
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -165,11 +183,11 @@ export const StaggeredText = ({
       className={cn("relative", className)}
     >
       {children.split(" ").map((word, i) => (
-        <>
-          <motion.span className="inline-block" key={i} variants={variants}>
+        <React.Fragment key={i}>
+          <motion.span key={i} className="inline-block" variants={variants}>
             {word}
           </motion.span>{" "}
-        </>
+        </React.Fragment>
       ))}
     </motion.span>
   );
