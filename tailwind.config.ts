@@ -62,6 +62,14 @@ export default {
           "5": "hsl(var(--chart-5))",
         },
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
       container: {
         padding: {
           DEFAULT: "1rem",
@@ -70,11 +78,6 @@ export default {
           xl: "5rem",
           "2xl": "6rem",
         },
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
         sans: ["var(--font-supply-mono)"],
@@ -86,9 +89,6 @@ export default {
       },
       letterSpacing: {
         tightest: "-0.1em",
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
     },
   },

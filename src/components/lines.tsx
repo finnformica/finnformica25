@@ -55,7 +55,7 @@ export const WireframeLine = ({
       <line
         {...{ x1, x2, y1, y2 }}
         vector-effect="non-scaling-stroke"
-        stroke="rgba(139, 139, 139, 0.4)"
+        stroke="rgba(139, 139, 139, 0.2)"
       />
     </svg>
   );

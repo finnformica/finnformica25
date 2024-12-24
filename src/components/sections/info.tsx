@@ -28,7 +28,7 @@ const Info = () => {
     <>
       <WireframeLine orientation="tr" className="md:-translate-x-1/4" />
       <WireframeLine orientation="tl" className="md:-translate-x-1/4" />
-      <WireframeLine orientation="h" />
+      <WireframeLine orientation="h" className="top-1/2" />
 
       <div className="container mx-auto flex h-full flex-col">
         {renderCrosshairIcons()}

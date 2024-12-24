@@ -25,10 +25,28 @@ const Hero = () => {
 
   return (
     <>
-      <WireframeLine orientation="v" className="translate-x-1" />
-      <WireframeLine orientation="v" className="-translate-x-1" />
+      <WireframeLine
+        orientation="v"
+        className="left-[calc(75%)] hidden md:block"
+      />
+      <WireframeLine
+        orientation="v"
+        className="left-[calc(75%_-_8px)] hidden md:block"
+      />
 
-      <div className="hero flex h-full min-h-full flex-col">
+      <WireframeLine
+        orientation="v"
+        className="left-[calc(25%)] hidden md:block"
+      />
+      <WireframeLine
+        orientation="v"
+        className="left-[calc(25%_-_8px)] hidden md:block"
+      />
+
+      <WireframeLine orientation="v" className="left-[15px]" />
+      <WireframeLine orientation="v" className="left-[calc(100%_-_15px)]" />
+
+      <div className="hero z-[1px] flex h-full min-h-full flex-col">
         <Header />
 
         {/* Content container */}

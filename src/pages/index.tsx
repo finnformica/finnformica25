@@ -9,7 +9,7 @@ export default function Home() {
       {sections.map((comp, i) => (
         <section
           key={i}
-          className="relative flex h-screen w-screen snap-start flex-col items-center justify-center rounded-xl border-8 bg-[var(--background)]"
+          className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-8 bg-[var(--background)]"
         >
           {comp}
         </section>
