@@ -51,6 +51,8 @@ export default {
           foreground: "hsl(var(--destructive-foreground))",
         },
         divider: "rgba(139, 139, 139, 0.4)",
+        "divider-dark": "rgba(139, 139, 139, 0.2)",
+        "divider-light": "rgba(139, 139, 139, 0.6)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -70,13 +72,14 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      borderWidth: { 1: "1px" },
       container: {
         padding: {
           DEFAULT: "1rem",
-          sm: "2rem",
-          lg: "4rem",
-          xl: "5rem",
-          "2xl": "6rem",
+          sm: "2.5rem",
+          lg: "5rem",
+          xl: "6rem",
+          "2xl": "8rem",
         },
       },
       fontFamily: {
@@ -87,9 +90,7 @@ export default {
         "10xl": "10rem",
         "11xl": "12rem",
       },
-      letterSpacing: {
-        tightest: "-0.1em",
-      },
+      letterSpacing: { tightest: "-0.1em" },
     },
   },
   plugins: [require("tailwindcss-animate")],

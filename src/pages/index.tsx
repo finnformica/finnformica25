@@ -1,12 +1,18 @@
 import Projects from "@/components/sections/projects";
 import Hero from "@/components/sections/hero";
 import Info from "@/components/sections/info";
+import Tech from "@/components/sections/tech";
+import Milestones from "@/components/sections/milestones";
+import Footer from "@/components/sections/footer";
 
 export default function Home() {
   const sections = [
     <Hero key="hero" />,
     <Info key="info" />,
     <Projects key="projects" />,
+    <Tech key="tech" />,
+    <Milestones key="milestones" />,
+    <Footer key="footer" />,
   ];
 
   return (
@@ -14,7 +20,7 @@ export default function Home() {
       {sections.map((comp, i) => (
         <section
           key={i}
-          className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-8 bg-[var(--background)]"
+          className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-8 border-white bg-[var(--background)]"
         >
           {comp}
         </section>

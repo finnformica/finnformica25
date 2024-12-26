@@ -125,7 +125,7 @@ const Info = () => {
         <CrosshairIcons />
 
         {/* Content container */}
-        <div className="flex grow flex-col items-center justify-between gap-4 md:flex-row md:px-2">
+        <div className="flex grow flex-col items-center justify-evenly gap-4 md:flex-row md:px-2">
           {/* Small screen section title */}
           {renderTitle("md:hidden block w-full mx-0")}
 

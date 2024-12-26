@@ -28,25 +28,23 @@ const Header = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light z-40 hidden w-full md:block">
         <div className="container mx-auto flex w-full flex-row justify-between py-4">
-          <div className="w-1/4">
-            <a href="#info">
-              <RollingText text="info" />
-            </a>
-          </div>
+          <a href="#info">
+            <RollingText text="info" />
+          </a>
 
           <div className="flex w-1/2 flex-row items-center justify-between">
             <CrosshairIcon />
+
             <Link href="/">
               <Initials />
             </Link>
+
             <CrosshairIcon />
           </div>
 
-          <div className="w-1/4 text-right">
-            <a href="#projects">
-              <RollingText text="projects" />
-            </a>
-          </div>
+          <a href="#projects">
+            <RollingText text="projects" />
+          </a>
         </div>
       </nav>
 

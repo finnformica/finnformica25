@@ -39,7 +39,7 @@ export const CrosshairIcon = ({
 );
 
 export const CrosshairIcons = () => (
-  <div className="flex h-40 items-center justify-between px-4 md:px-0">
+  <div className="flex h-40 items-center justify-between">
     <CrosshairIcon />
     <CrosshairIcon />
   </div>

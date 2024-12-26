@@ -9,7 +9,7 @@ export const Avatar = ({
   className,
   rounded,
 }: {
-  className: string;
+  className?: string;
   rounded: boolean;
 }) => (
   <motion.div
@@ -33,10 +33,19 @@ export const Initials = () => (
   </h1>
 );
 
-export const Banner = () => (
-  <Marquee pauseOnHover numberOfCopies={3}>
+export const Banner = ({
+  className,
+  innerClassName,
+}: {
+  className?: string;
+  innerClassName?: string;
+}) => (
+  <Marquee pauseOnHover numberOfCopies={3} className={className}>
     <h1
-      className={`${outerSans.className} text-nowrap text-8xl font-black sm:text-9xl lg:text-10xl`}
+      className={cn(
+        `${outerSans.className} text-nowrap text-8xl font-black text-white sm:text-9xl lg:text-10xl`,
+        innerClassName,
+      )}
     >
       finn formica
     </h1>
