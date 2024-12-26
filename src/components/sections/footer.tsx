@@ -50,7 +50,7 @@ const Footer = () => {
 
           <div className="flex grow flex-col px-8 sm:px-0 md:flex-row">
             {/* Text content */}
-            <div className="flex grow flex-col gap-6">
+            <div className="flex grow flex-col gap-6 md:pl-4">
               <span className="pb-0.5 text-sm text-gray-400">
                 Thank you, for checking out my site.
               </span>
