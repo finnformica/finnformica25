@@ -82,7 +82,7 @@ const Projects = () => {
   return (
     <>
       <VerticalLines />
-      <div className="container mx-auto">
+      <div className="container mx-auto mt-12">
         <SectionTitle text="projects" />
       </div>
       <div className="no-scrollbar relative flex grow flex-row items-center justify-center gap-8 overflow-x-scroll pt-8">

@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 export const CrosshairIcon = ({
   width = "15",
   height = "15",
@@ -38,8 +40,8 @@ export const CrosshairIcon = ({
   </svg>
 );
 
-export const CrosshairIcons = () => (
-  <div className="flex h-40 items-center justify-between">
+export const CrosshairIcons = ({ className }: { className?: string }) => (
+  <div className={cn("flex h-40 items-center justify-between", className)}>
     <CrosshairIcon />
     <CrosshairIcon />
   </div>

@@ -127,7 +127,7 @@ const Info = () => {
         {/* Content container */}
         <div className="flex grow flex-col items-center justify-evenly gap-4 md:flex-row md:px-2">
           {/* Small screen section title */}
-          {renderTitle("md:hidden block w-full mx-0")}
+          {renderTitle("md:hidden w-full mx-0")}
 
           {/* Image container */}
           <div
