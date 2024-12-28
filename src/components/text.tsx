@@ -14,7 +14,7 @@ export const SectionTitle = ({
   <HackerText
     text={text}
     className={cn(
-      `${outerSans.className} z-10 inline-block border-[1px] border-divider bg-[var(--background)] px-16 py-4 text-center text-2xl`,
+      `${outerSans.className} inline-block border-[1px] border-divider bg-[var(--background)] px-16 py-4 text-center text-2xl`,
       className,
     )}
   />
@@ -90,8 +90,8 @@ export const RollingText = ({
     <motion.div
       ref={ref}
       initial="initial"
-      whileHover="hovered"
-      animate={isInView ? "hovered" : "initial"}
+      whileHover="initial"
+      animate={isInView ? "animate" : "initial"}
       className={cn(
         "relative block overflow-hidden whitespace-nowrap",
         className,
@@ -102,12 +102,8 @@ export const RollingText = ({
         {text.split("").map((l, i) => (
           <motion.span
             variants={{
-              initial: {
-                y: 0,
-              },
-              hovered: {
-                y: "-100%",
-              },
+              initial: { y: "-100%" },
+              animate: { y: 0 },
             }}
             transition={{
               duration: DURATION,
@@ -125,12 +121,8 @@ export const RollingText = ({
         {text.split("").map((l, i) => (
           <motion.span
             variants={{
-              initial: {
-                y: "100%",
-              },
-              hovered: {
-                y: 0,
-              },
+              initial: { y: 0 },
+              animate: { y: "100%" },
             }}
             transition={{
               duration: DURATION,
