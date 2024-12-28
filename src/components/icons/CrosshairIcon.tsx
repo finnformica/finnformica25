@@ -11,7 +11,7 @@ export const CrosshairIcon = ({
     width={width}
     height={height}
     viewBox={`0 0 ${width} ${height}`}
-    fill="none"
+    fill="var(--foreground)"
     xmlns="http://www.w3.org/2000/svg"
   >
     {/* Top Vertical Line */}
