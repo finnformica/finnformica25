@@ -10,7 +10,7 @@ const ProjectCard = ({
   return (
     <div
       className={cn(
-        "border-1 border-divider-light z-10 min-h-[600px] min-w-[350px] max-w-[350px] rounded bg-black",
+        "border-1 border-divider-light z-10 min-h-[600px] min-w-[350px] max-w-[350px] rounded bg-[var(--background)]",
         className,
       )}
       style={style}

@@ -41,9 +41,9 @@ const Footer = () => {
   ];
 
   return (
-    <div className="flex h-full flex-col bg-white">
+    <div className="flex h-full flex-col bg-[var(--foreground)]">
       {/* Border Radius above CTA */}
-      <div className="relative flex grow flex-col rounded bg-black">
+      <div className="relative flex grow flex-col rounded bg-[var(--background)]">
         {/* Content */}
         <div className="container mx-auto flex grow flex-col">
           <CrosshairIcons />
@@ -106,7 +106,7 @@ const Footer = () => {
       </div>
 
       {/* CTA */}
-      <div className="bg-white pb-1 pt-3">
+      <div className="bg-[var(--foreground)] pb-1 pt-3">
         <Button size="default" className="w-full cursor-pointer">
           Get in touch
         </Button>

@@ -43,7 +43,7 @@ export const Banner = ({
   <Marquee pauseOnHover numberOfCopies={3} className={className}>
     <h1
       className={cn(
-        `${outerSans.className} text-nowrap text-8xl font-black text-white sm:text-9xl lg:text-10xl`,
+        `${outerSans.className} text-nowrap text-8xl font-black text-[var(--foreground)] sm:text-9xl lg:text-10xl`,
         innerClassName,
       )}
     >

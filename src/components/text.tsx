@@ -14,7 +14,7 @@ export const SectionTitle = ({
   <HackerText
     text={text}
     className={cn(
-      `${outerSans.className} inline-block border-[1px] border-divider px-16 py-4 text-center text-2xl`,
+      `${outerSans.className} z-10 inline-block border-[1px] border-divider bg-[var(--background)] px-16 py-4 text-center text-2xl`,
       className,
     )}
   />

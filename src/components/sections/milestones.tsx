@@ -81,7 +81,7 @@ const Milestones = () => {
                 >
                   {item.year}
                   <MotionSeparator
-                    className="w-20 bg-white"
+                    className="w-20 bg-[var(--foreground)]"
                     key={i}
                     variants={{
                       initial: { width: "80px" },
