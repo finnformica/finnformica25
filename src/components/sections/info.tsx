@@ -31,32 +31,28 @@ const transition = {
 
 const content = [
   {
-    text: "I explore the intersection of engineering, data science and AI",
+    text: "Focus on functional and intuitive user journeys throughout the application.",
     img: "/info1.png",
     alt: "info",
     num: 23,
-    tag: "DV",
+    tag: "DS",
+    header: "[ DS ] Design",
   },
   {
-    text: "I explore the intersection of engineering, data science and AI",
+    text: "Build solution using Next.js + React for customisability or Framer for speed.",
     img: "/info1.png",
     alt: "info",
     num: 24,
-    tag: "DD",
+    tag: "DV",
+    header: "[ DV ] Develop",
   },
   {
-    text: "I explore the intersection of engineering, data science and AI",
+    text: "Ship the finished product to a live site for your users to interact with.",
     img: "/info1.png",
     alt: "info",
     num: 25,
-    tag: "DS",
-  },
-  {
-    text: "I explore the intersection of engineering, data science and AI",
-    img: "/info1.png",
-    alt: "info",
-    num: 26,
-    tag: "AI",
+    tag: "DE",
+    header: "[ DE ] Deploy",
   },
 ];
 
@@ -125,7 +121,7 @@ const Info = () => {
         <CrosshairIcons />
 
         {/* Content container */}
-        <div className="flex grow flex-col items-center justify-evenly gap-4 md:flex-row md:px-2">
+        <div className="flex grow flex-col items-center justify-evenly gap-6 md:flex-row md:gap-4 md:px-2">
           {/* Small screen section title */}
           {renderTitle("md:hidden w-full mx-0")}
 
@@ -145,7 +141,7 @@ const Info = () => {
                 transition={transition}
                 className="flex flex-row justify-between px-2 pt-2 text-[var(--background)]"
               >
-                <p>{`[${item.tag}]`}</p>
+                <p>{`[ ${item.tag} ]`}</p>
 
                 <p>{item.num}</p>
               </motion.div>
@@ -155,10 +151,10 @@ const Info = () => {
           </div>
 
           {/* Text container */}
-          <div className="z-10 h-full w-3/4 md:w-[40%]">
+          <div className="z-10 h-full w-3/4 md:w-[40%] md:text-right">
             {renderTitle("hidden md:block")}
 
-            <StaggeredText key={selected} className="text-lg">
+            <StaggeredText key={selected} className="md:text-lg">
               {item.text}
             </StaggeredText>
 
@@ -173,19 +169,19 @@ const Info = () => {
                 </Button>
               </div>
 
-              <motion.span
-                key={selected}
-                variants={{
-                  initial: { opacity: 0 },
-                  animate: { opacity: 1 },
-                }}
-                initial="initial"
-                animate={isInView ? "animate" : "initial"}
-                transition={transition}
-                className="text-sm font-thin text-gray-300"
-              >
-                - [Finn Formica]
-              </motion.span>
+              <AnimatePresence mode="wait">
+                <motion.h2
+                  key={selected}
+                  className="inline-block rounded-full bg-white px-3 py-2 text-sm text-black"
+                  variants={variants}
+                  initial="initial"
+                  animate={isInView ? "animate" : "initial"}
+                  exit="exit"
+                  transition={transition}
+                >
+                  {item.header}
+                </motion.h2>
+              </AnimatePresence>
             </div>
           </div>
         </div>
