@@ -50,12 +50,12 @@ const Footer = () => {
 
           <div className="flex grow flex-col px-8 sm:px-0 md:flex-row">
             {/* Text content */}
-            <div className="flex grow flex-col gap-6 md:pl-4">
-              <span className="pb-0.5 text-sm text-gray-400">
+            <div className="flex grow flex-col gap-2 md:gap-6 md:pl-4">
+              <span className="pb-0.5 text-xs text-gray-400 md:text-sm">
                 Thank you, for checking out my site.
               </span>
 
-              <p className="bg-gradient-to-r from-gray-600 to-white to-25% bg-clip-text text-xl text-transparent md:grow-0">
+              <p className="bg-gradient-to-r from-gray-600 to-white to-25% bg-clip-text text-transparent md:grow-0 md:text-xl">
                 I hope my work has inspired you and I&apos;d love to hear from
                 you. Let&apos;s connect and explore incredible possibilities
                 together.

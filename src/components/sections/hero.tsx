@@ -14,12 +14,12 @@ const Hero = () => {
       tag: "DS",
     },
     {
-      name: "Development",
+      name: "Develop",
       tag: "DV",
     },
     {
-      name: "Artificial Intelligence",
-      tag: "AI",
+      name: "Deploy",
+      tag: "DE",
     },
   ];
 
@@ -39,12 +39,12 @@ const Hero = () => {
               <span className="pb-0.5 text-sm text-gray-400">Hello World.</span>
               <HackerText
                 text="My name is Finn."
-                className="text-5xl drop-shadow-[0px_0px_2px_rgba(255,255,255,0.75)] lg:whitespace-nowrap"
+                className="drop-shadow-white text-3xl md:text-5xl lg:whitespace-nowrap"
               />
             </div>
 
             {/* Body */}
-            <p className="grow bg-gradient-to-r from-gray-600 to-white to-25% bg-clip-text text-xl text-transparent md:grow-0">
+            <p className="grow bg-gradient-to-r from-gray-600 to-white to-25% bg-clip-text text-sm text-transparent sm:text-base md:grow-0">
               My unique skill and interest in Data Science, Development and AI
               equips me to provide cutting edge solutions in new dynamic fields.
             </p>
@@ -65,7 +65,7 @@ const Hero = () => {
             <Avatar className="h-48 w-48" rounded />
 
             {/* Tags */}
-            <div className="mx-auto hidden w-40 gap-4 md:flex md:flex-col">
+            <div className="mx-auto hidden gap-4 md:flex md:flex-col">
               {tags.map((tag, i) => (
                 <motion.div
                   key={i}
@@ -78,7 +78,7 @@ const Hero = () => {
                   }}
                   className="flex flex-row gap-2 font-bold"
                 >
-                  <span>{`[${tag.tag}]`}</span>
+                  <span>{`[ ${tag.tag} ]`}</span>
                   <span>{tag.name}</span>
                 </motion.div>
               ))}

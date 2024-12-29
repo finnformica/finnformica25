@@ -93,7 +93,7 @@ const Milestones = () => {
                   />
                 </MotionAccordionTrigger>
               </AnimatePresence>
-              <AccordionContent key={i} className="text-right">
+              <AccordionContent key={i} className="text-right md:text-lg">
                 {item.text}
               </AccordionContent>
             </AccordionItem>
