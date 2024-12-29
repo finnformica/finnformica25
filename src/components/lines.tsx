@@ -49,8 +49,7 @@ export const WireframeLine = ({
       height={height}
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
-      style={{ position: "absolute" }}
-      className={cn("max-w-screen z-0 max-h-screen", className)}
+      className={cn("max-w-screen absolute z-0 max-h-screen", className)}
     >
       <line
         {...{ x1, x2, y1, y2 }}
@@ -69,7 +68,7 @@ export const VerticalLines = () => (
     />
     <WireframeLine
       orientation="v"
-      className="left-[calc(75%_-_8px)] hidden md:block"
+      className="left-[calc(75%_+_8px)] hidden md:block"
     />
 
     <WireframeLine
