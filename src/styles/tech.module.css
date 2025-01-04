@@ -6,7 +6,7 @@
   transform: rotateX(50deg) rotateZ(-70deg);
 }
 
-#container {
+.container {
   box-sizing: border-box;
   width: 140rem;
   transform: rotateX(50deg) rotateZ(20deg);
@@ -16,15 +16,15 @@
   grid-template-columns: repeat(40, 1fr);
 }
 
-#container:after,
-#container:before {
+.container:after,
+.container:before {
   content: "";
   position: absolute;
   inset: 0px;
   pointer-events: none;
 }
 
-#container:before {
+.container:before {
   z-index: 2;
   background-image: url("/plus-pattern-center.webp");
   background-size: 5%;

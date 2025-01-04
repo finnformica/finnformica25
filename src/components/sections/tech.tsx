@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 import { SectionTitle } from "@/components/text";
-import "@/styles/tech.css";
-import { useState } from "react";
+import styles from "@/styles/tech.module.css";
 import { cn } from "@/lib/utils";
 
 const Tech = () => {
@@ -40,19 +40,21 @@ const Tech = () => {
   return (
     <>
       {/* Grid */}
-      <div id="container" className="tech-grid">
+      <div className={styles.container}>
         {[...Array(900).keys()].map((i) => (
-          <div key={i} className="tile" />
+          <div key={i} className={styles.tile} />
         ))}
       </div>
 
       <SectionTitle
         text="tech"
-        className="transform-clockwise absolute left-[450px] top-[170px] border-none bg-transparent p-0 text-3xl md:text-4xl"
+        className={`${styles["transform-clockwise"]} absolute left-[450px] top-[170px] border-none bg-transparent p-0 text-3xl md:text-4xl`}
       />
 
       {/* Buttons */}
-      <motion.div className="transform-anticlockwise absolute left-[150px] top-[320px] flex items-center gap-4">
+      <motion.div
+        className={`${styles["transform-anticlockwise"]} absolute left-[150px] top-[320px] flex items-center gap-4`}
+      >
         {content.map((item, i) => (
           <motion.div
             key={i}
@@ -91,7 +93,7 @@ const Tech = () => {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="transform-clockwise absolute left-[400px] top-[210px] w-96 border-[var(--divider)] bg-[var(--background)] p-2"
+            className={`${styles["transform-clockwise"]} absolute left-[400px] top-[210px] w-96 border-[var(--divider)] bg-[var(--background)] p-2`}
           >
             <p className="text-xl">{content[selected].caption}</p>
             <p>{content[selected].description}</p>
