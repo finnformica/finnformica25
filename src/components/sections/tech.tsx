@@ -1,30 +1,34 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion, useInView } from "motion/react";
+import { useRef, useState } from "react";
 
 import { SectionTitle } from "@/components/text";
-import styles from "@/styles/tech.module.css";
 import { cn } from "@/lib/utils";
+import styles from "@/styles/tech.module.css";
+import { useIsScreenSm } from "@/hooks/useMediaQuery";
 
 const Tech = () => {
-  const [selected, setSelected] = useState<number | null>(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0.5 });
+  const [selected, setSelected] = useState<number | null>(null);
+  const isScreenSmall = useIsScreenSm();
 
   const content = [
     {
+      caption: "Design",
+      description:
+        "Design enthusiast with experience in creating user interfaces and user experiences. Proficient in tools such as Figma and Adobe XD.",
+      icon: null,
+    },
+    {
       caption: "Full-stack",
       description:
-        "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum",
+        "Full-stack developer with experience in building and deploying web applications. Proficient in both front-end and back-end technologies such as React, Node.js, and Django.",
       icon: null,
     },
     {
       caption: "Cloud",
       description:
-        "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum",
-      icon: null,
-    },
-    {
-      caption: "Design",
-      description:
-        "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum",
+        "Google Cloud certified engineer with experience in deploying and managing cloud infrastructure.",
       icon: null,
     },
   ];
@@ -39,29 +43,85 @@ const Tech = () => {
 
   return (
     <>
+      <SectionTitle
+        text="tech"
+        className={`${styles["transform-clockwise"]} absolute left-[200px] top-[110px] border-none bg-transparent p-0 text-3xl md:text-4xl lg:left-[450px] lg:top-[170px]`}
+      />
+
       {/* Grid */}
       <div className={styles.container}>
         {[...Array(900).keys()].map((i) => (
           <div key={i} className={styles.tile} />
         ))}
-      </div>
 
-      <SectionTitle
-        text="tech"
-        className={`${styles["transform-clockwise"]} absolute left-[450px] top-[170px] border-none bg-transparent p-0 text-3xl md:text-4xl`}
-      />
+        {/* Text */}
+        <AnimatePresence mode="wait">
+          {/* Content panel */}
+          {typeof selected === "number" && (
+            <motion.div
+              key={selected}
+              variants={{
+                initial: { left: 56, top: "100%" },
+                animate: {
+                  left: isScreenSmall ? 56 : 8,
+                  top: isScreenSmall ? 56 : 8,
+                },
+                exit: { opacity: 0 },
+              }}
+              transition={{
+                default: {
+                  type: "spring",
+                  mass: 0.1,
+                  damping: 10,
+                  stiffness: 100,
+                  ease: "easeInOut",
+                },
+                opacity: { ease: "linear" },
+              }}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="absolute w-[40vw] md:w-[50vw]"
+            >
+              <p className="p-2 text-sm backdrop-blur sm:text-base md:text-lg lg:text-xl">
+                {content[selected].description}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* Buttons */}
       <motion.div
-        className={`${styles["transform-anticlockwise"]} absolute left-[150px] top-[320px] flex items-center gap-4`}
+        ref={ref}
+        initial="initial"
+        animate={isInView ? "animate" : "initial"}
+        transition={{
+          staggerChildren: 0.15,
+          ease: "easeInOut",
+        }}
+        className={`${styles["transform-anticlockwise"]} absolute left-[-80px] top-[220px] flex items-center gap-3 lg:left-[150px] lg:top-[320px]`}
       >
         {content.map((item, i) => (
           <motion.div
             key={i}
+            whileHover="hover"
+            variants={{
+              initial: { y: 10 },
+              animate: { y: 0 },
+              hover: {
+                y: -10,
+                transition: {
+                  type: "linear",
+                  duration: 0.3,
+                  ease: "easeInOut",
+                },
+              },
+            }}
             className={cn(
-              "min-w-fit cursor-pointer rounded-full bg-[var(--foreground)] px-6 py-2 text-[var(--background)] transition-all duration-300 ease-in-out hover:-translate-y-2 hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]",
+              "min-w-fit cursor-pointer rounded-full border-2 border-[var(--background)] bg-[var(--foreground)] px-6 py-2 text-sm text-[var(--background)] lg:text-base",
               selected === i &&
-                "border-2 border-[var(--foreground)] bg-transparent text-[var(--foreground)]",
+                "border-[var(--foreground)] bg-transparent text-[var(--foreground)]",
             )}
             onClick={handleClick(i)}
           >
@@ -69,37 +129,6 @@ const Tech = () => {
           </motion.div>
         ))}
       </motion.div>
-
-      <AnimatePresence mode="wait">
-        {/* Content panel */}
-        {typeof selected === "number" && (
-          <motion.div
-            key={selected}
-            variants={{
-              initial: { left: 0, top: "100vh" },
-              animate: { left: 400, top: 210 },
-              exit: { opacity: 0 },
-            }}
-            transition={{
-              default: {
-                type: "spring",
-                mass: 0.1,
-                damping: 10,
-                stiffness: 100,
-                ease: "easeInOut",
-              },
-              opacity: { ease: "linear" },
-            }}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className={`${styles["transform-clockwise"]} absolute left-[400px] top-[210px] w-96 border-[var(--divider)] bg-[var(--background)] p-2`}
-          >
-            <p className="text-xl">{content[selected].caption}</p>
-            <p>{content[selected].description}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 };

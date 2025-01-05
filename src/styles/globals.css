@@ -125,3 +125,18 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+/* Globally used styles */
+
+.gradient::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  z-index: 10;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--background), transparent 20%),
+    color-mix(in srgb, var(--background), transparent 90%) 25%
+  );
+}

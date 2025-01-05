@@ -7,6 +7,7 @@
 }
 
 .container {
+  position: relative;
   box-sizing: border-box;
   width: 140rem;
   transform: rotateX(50deg) rotateZ(20deg);
@@ -30,6 +31,12 @@
   background-size: 5%;
   background-repeat: repeat;
   opacity: 0.25;
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    transform: rotateX(50deg) rotateZ(20deg) translateX(-275px);
+  }
 }
 
 .tile {
