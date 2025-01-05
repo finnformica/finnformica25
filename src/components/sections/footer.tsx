@@ -7,8 +7,8 @@ import Github from "@/components/icons/github";
 import Linkedin from "@/components/icons/linkedin";
 import Mail from "@/components/icons/mail";
 import MagneticItem from "@/components/magnetic-item";
+import { StaggeredText } from "@/components/text";
 import { Button } from "@/components/ui/button";
-import { StaggeredText } from "../text";
 
 const variants = {
   initial: { y: 25, opacity: 0 },
@@ -55,11 +55,11 @@ const Footer = () => {
                 Thank you, for checking out my site.
               </span>
 
-              <p className="bg-gradient-to-r from-gray-600 to-white to-25% bg-clip-text text-transparent md:grow-0 md:text-xl">
+              <StaggeredText className="gradient md:grow-0 md:text-xl">
                 I hope my work has inspired you and I&apos;d love to hear from
                 you. Let&apos;s connect and explore incredible possibilities
                 together.
-              </p>
+              </StaggeredText>
 
               <Initials />
             </div>
@@ -96,8 +96,11 @@ const Footer = () => {
                   </MotionMagneticItem>
                 ))}
               </motion.div>
-              <StaggeredText className="pb-0.5 text-center text-sm text-gray-200 md:whitespace-nowrap md:text-right">
-                Made by @finnformica, designed by @synchronize
+              <StaggeredText
+                staggerChildren={0.2}
+                className="pb-0.5 text-center text-sm text-gray-200 md:whitespace-nowrap md:text-right"
+              >
+                Made by @finnformica using Next.js, Tailwind, Motion, and R3F
               </StaggeredText>
             </div>
           </div>

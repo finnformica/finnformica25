@@ -154,7 +154,7 @@ const Info = () => {
           <div className="z-10 h-full w-3/4 md:w-[40%] md:text-right">
             {renderTitle("hidden md:block")}
 
-            <StaggeredText key={selected} className="md:text-lg">
+            <StaggeredText key={selected} className="gradient md:text-lg">
               {item.text}
             </StaggeredText>
 

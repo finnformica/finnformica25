@@ -143,9 +143,11 @@ export const RollingText = ({
 export const StaggeredText = ({
   children,
   className,
+  staggerChildren = 0.05,
 }: {
   children: string;
   className?: string;
+  staggerChildren?: number;
 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.5 });
@@ -169,7 +171,7 @@ export const StaggeredText = ({
       transition={{
         duration: 1,
         ease: "easeInOut",
-        staggerChildren: 0.1,
+        staggerChildren,
       }}
       aria-hidden
       className={cn("relative", className)}

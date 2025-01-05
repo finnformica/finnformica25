@@ -9,7 +9,7 @@ import { useIsScreenSm } from "@/hooks/useMediaQuery";
 const Tech = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.5 });
-  const [selected, setSelected] = useState<number | null>(null);
+  const [selected, setSelected] = useState<number | null>(0);
   const isScreenSmall = useIsScreenSm();
 
   const content = [
@@ -79,7 +79,7 @@ const Tech = () => {
                 opacity: { ease: "linear" },
               }}
               initial="initial"
-              animate="animate"
+              animate={isInView ? "animate" : "initial"}
               exit="exit"
               className="absolute w-[40vw] md:w-[50vw]"
             >

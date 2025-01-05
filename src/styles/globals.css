@@ -128,6 +128,12 @@ body {
 
 /* Globally used styles */
 
+.gradient {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .gradient::after {
   position: absolute;
   inset: 0;
