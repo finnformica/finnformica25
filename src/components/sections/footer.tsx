@@ -110,7 +110,10 @@ const Footer = () => {
 
       {/* CTA */}
       <div className="bg-[var(--foreground)] pb-1 pt-3">
-        <Button size="default" className="w-full cursor-pointer">
+        <Button
+          size="default"
+          className="w-full cursor-pointer bg-[var(--background)] text-[var(--foreground)]"
+        >
           Get in touch
         </Button>
       </div>
