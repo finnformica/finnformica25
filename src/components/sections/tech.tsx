@@ -1,51 +1,135 @@
-import { CrosshairIcons } from "@/components/icons/CrosshairIcon";
-import { SectionTitle } from "@/components/text";
+import { AnimatePresence, motion, useInView } from "motion/react";
+import { useRef, useState } from "react";
 
-import Github from "../icons/github";
+import { SectionTitle } from "@/components/text";
+import { cn } from "@/lib/utils";
+import styles from "@/styles/tech.module.css";
+import { useIsScreenSm } from "@/hooks/useMediaQuery";
 
 const Tech = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0.5 });
+  const [selected, setSelected] = useState<number | null>(null);
+  const isScreenSmall = useIsScreenSm();
+
   const content = [
-    { caption: "Front End", icon: null },
-    { caption: "Back End", icon: null },
-    { caption: "Machine Learning", icon: null },
-    { caption: "Blockchain", icon: null },
-    { caption: "Cloud Computing", icon: null },
-    { caption: "User Experience", icon: null },
-    { caption: "Web Design", icon: null },
-    { caption: "Product & Innovation", icon: null },
-    { caption: "Web Design", icon: null },
+    {
+      caption: "Design",
+      description:
+        "Design enthusiast with experience in creating user interfaces and user experiences. Proficient in tools such as Figma and Adobe XD.",
+      icon: null,
+    },
+    {
+      caption: "Full-stack",
+      description:
+        "Full-stack developer with experience in building and deploying web applications. Proficient in both front-end and back-end technologies such as React, Node.js, and Django.",
+      icon: null,
+    },
+    {
+      caption: "Cloud",
+      description:
+        "Google Cloud certified engineer with experience in deploying and managing cloud infrastructure.",
+      icon: null,
+    },
   ];
 
-  return (
-    <div className="container mx-auto my-12 flex h-full flex-col">
-      <div className="flex grow flex-col-reverse md:flex-row">
-        <div className="md:w-1/2">
-          {/* Grid container / parent */}
-          <div className="grid grid-cols-3">
-            {content.map((item, i) => (
-              // Grid item / child
-              <div
-                key={i}
-                className="col-span-1 row-span-1 flex aspect-square cursor-pointer flex-col items-center justify-between gap-2 p-2 text-center shadow-[0_0_1px_0_var(--foreground)] transition-all ease-in hover:drop-shadow-[0_0_2px_var(--foreground)]"
-              >
-                {/* Container to center icon */}
-                <div className="flex grow items-center">
-                  <Github />
-                </div>
-                <p className="text-sm">{item.caption}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+  const handleClick = (i: number) => () => {
+    if (selected === i) {
+      setSelected(null);
+    } else {
+      setSelected(i);
+    }
+  };
 
-        {/* Text container */}
-        <div className="md:w-1/2">
-          <SectionTitle text="tech" />
-        </div>
+  return (
+    <>
+      <SectionTitle
+        text="tech"
+        className={`${styles["transform-clockwise"]} absolute left-[200px] top-[110px] border-none bg-transparent p-0 text-3xl md:text-4xl lg:left-[450px] lg:top-[170px]`}
+      />
+
+      {/* Grid */}
+      <div className={styles.container}>
+        {[...Array(900).keys()].map((i) => (
+          <div key={i} className={styles.tile} />
+        ))}
+
+        {/* Text */}
+        <AnimatePresence mode="wait">
+          {/* Content panel */}
+          {typeof selected === "number" && (
+            <motion.div
+              key={selected}
+              variants={{
+                initial: { left: 56, top: "100%" },
+                animate: {
+                  left: isScreenSmall ? 56 : 8,
+                  top: isScreenSmall ? 56 : 8,
+                },
+                exit: { opacity: 0 },
+              }}
+              transition={{
+                default: {
+                  type: "spring",
+                  mass: 0.1,
+                  damping: 10,
+                  stiffness: 100,
+                  ease: "easeInOut",
+                },
+                opacity: { ease: "linear" },
+              }}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="absolute w-[40vw] md:w-[50vw]"
+            >
+              <p className="p-2 text-sm backdrop-blur sm:text-base md:text-lg lg:text-xl">
+                {content[selected].description}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      <CrosshairIcons className="items-end" />
-    </div>
+      {/* Buttons */}
+      <motion.div
+        ref={ref}
+        initial="initial"
+        animate={isInView ? "animate" : "initial"}
+        transition={{
+          staggerChildren: 0.15,
+          ease: "easeInOut",
+        }}
+        className={`${styles["transform-anticlockwise"]} absolute left-[-80px] top-[220px] flex items-center gap-3 lg:left-[150px] lg:top-[320px]`}
+      >
+        {content.map((item, i) => (
+          <motion.div
+            key={i}
+            whileHover="hover"
+            variants={{
+              initial: { y: 10 },
+              animate: { y: 0 },
+              hover: {
+                y: -10,
+                transition: {
+                  type: "linear",
+                  duration: 0.3,
+                  ease: "easeInOut",
+                },
+              },
+            }}
+            className={cn(
+              "min-w-fit cursor-pointer rounded-full border-2 border-[var(--background)] bg-[var(--foreground)] px-6 py-2 text-sm text-[var(--background)] lg:text-base",
+              selected === i &&
+                "border-[var(--foreground)] bg-transparent text-[var(--foreground)]",
+            )}
+            onClick={handleClick(i)}
+          >
+            {item.caption}
+          </motion.div>
+        ))}
+      </motion.div>
+    </>
   );
 };
 
