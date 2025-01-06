@@ -46,7 +46,7 @@ const Footer = () => {
       <div className="relative flex grow flex-col rounded bg-[var(--background)]">
         {/* Content */}
         <div className="container mx-auto flex grow flex-col">
-          <CrosshairIcons />
+          <CrosshairIcons className="h-20 sm:h-40" />
 
           <div className="flex grow flex-col px-8 sm:px-0 md:flex-row">
             {/* Text content */}

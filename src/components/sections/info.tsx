@@ -118,12 +118,12 @@ const Info = () => {
       <WireframeLine orientation="h" className="top-1/2" />
 
       <div className="container mx-auto flex h-full flex-col">
-        <CrosshairIcons />
+        <CrosshairIcons className="h-10 sm:h-40" />
 
         {/* Content container */}
-        <div className="flex grow flex-col items-center justify-evenly gap-6 md:flex-row md:gap-4 md:px-2">
+        <div className="flex grow flex-col items-center justify-center gap-6 sm:justify-evenly md:flex-row md:gap-4 md:px-2">
           {/* Small screen section title */}
-          {renderTitle("md:hidden w-full mx-0")}
+          {renderTitle("md:hidden w-full m-0")}
 
           {/* Image container */}
           <div
@@ -151,7 +151,7 @@ const Info = () => {
           </div>
 
           {/* Text container */}
-          <div className="z-10 h-full w-3/4 md:w-[40%] md:text-right">
+          <div className="z-10 w-3/4 sm:h-full md:w-[40%] md:text-right">
             {renderTitle("hidden md:block")}
 
             <StaggeredText key={selected} className="gradient md:text-lg">
@@ -186,7 +186,7 @@ const Info = () => {
           </div>
         </div>
 
-        <CrosshairIcons />
+        <CrosshairIcons className="h-10 sm:h-40" />
       </div>
     </>
   );

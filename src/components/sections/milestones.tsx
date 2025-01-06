@@ -53,7 +53,7 @@ const Milestones = () => {
       <CrossedLines />
 
       {/* Content container */}
-      <div className="container mx-auto my-12 flex h-full flex-col items-center md:items-start">
+      <div className="container mx-auto my-6 flex h-full flex-col items-center sm:my-12 md:items-start">
         <SectionTitle text="milestones" />
 
         {/* Accordion container */}

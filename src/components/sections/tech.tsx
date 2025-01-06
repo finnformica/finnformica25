@@ -45,7 +45,7 @@ const Tech = () => {
     <>
       <SectionTitle
         text="tech"
-        className={`${styles["transform-clockwise"]} absolute left-[200px] top-[110px] border-none bg-transparent p-0 text-3xl md:text-4xl lg:left-[450px] lg:top-[170px]`}
+        className={`${styles["transform-clockwise"]} absolute left-[200px] top-[110px] border-none bg-transparent p-0 text-3xl sm:left-[190px] sm:top-[90px] md:text-4xl lg:left-[455px] lg:top-[155px]`}
       />
 
       {/* Grid */}

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Barcode = ({ className }: { className: string }) => {
   return (
-    <div className={cn("h-12 w-52", className)}>
+    <div className={cn("h-6 w-52 sm:h-12", className)}>
       <Image
         alt="barcode"
         src="/barcode.png"
