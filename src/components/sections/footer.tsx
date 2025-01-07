@@ -98,7 +98,7 @@ const Footer = () => {
               </motion.div>
               <StaggeredText
                 staggerChildren={0.2}
-                className="pb-0.5 text-center text-sm text-gray-200 md:whitespace-nowrap md:text-right"
+                className="pb-0.5 text-center text-xs text-gray-200 md:whitespace-nowrap md:text-right md:text-sm"
               >
                 Made by @finnformica using Next.js, Tailwind, Motion, and R3F
               </StaggeredText>
