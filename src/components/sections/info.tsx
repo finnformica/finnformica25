@@ -117,7 +117,7 @@ const Info = () => {
       <CrossedLines />
       <WireframeLine orientation="h" className="top-1/2" />
 
-      <div className="container mx-auto flex h-full flex-col">
+      <div className="container mx-auto flex grow flex-col">
         <CrosshairIcons className="h-10 sm:h-40" />
 
         {/* Content container */}

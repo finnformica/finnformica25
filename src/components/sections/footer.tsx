@@ -41,7 +41,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="flex h-full flex-col bg-[var(--foreground)]">
+    <div className="flex grow flex-col bg-[var(--foreground)]">
       {/* Border Radius above CTA */}
       <div className="relative flex grow flex-col rounded bg-[var(--background)]">
         {/* Content */}
@@ -105,7 +105,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <Banner className="mb-[-12px] sm:mb-[-16px] lg:mb-[-24px]" />
+        <Banner />
       </div>
 
       {/* CTA */}

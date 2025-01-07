@@ -27,7 +27,7 @@ const Hero = () => {
     <>
       <VerticalLines />
 
-      <div className="hero z-[1px] flex h-full min-h-full flex-col">
+      <div className="hero z-[1px] flex grow flex-col">
         <Header />
 
         {/* Content container */}
