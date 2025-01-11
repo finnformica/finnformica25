@@ -18,7 +18,7 @@ export const Avatar = ({
     className={cn("relative rounded-full", className)}
   >
     <Image
-      src="/finnformica-logo.png"
+      src="/images/finnformica-logo.png"
       alt="logo"
       fill
       sizes="100vw"

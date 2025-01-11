@@ -18,10 +18,16 @@ import { Button } from "@/components/ui/button";
 import useMousePosition from "@/hooks/useMousePosition";
 import { cn } from "@/lib/utils";
 
-const variants: Variants = {
+const textVariants: Variants = {
   initial: { opacity: 0, y: -10 },
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: -10 },
+};
+
+const imgVariants: Variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
 };
 
 const transition = {
@@ -32,7 +38,7 @@ const transition = {
 const content = [
   {
     text: "Focus on functional and intuitive user journeys throughout the application.",
-    img: "/info1.png",
+    img: "/images/goggles.png",
     alt: "info",
     num: 23,
     tag: "DS",
@@ -40,7 +46,7 @@ const content = [
   },
   {
     text: "Build solution using Next.js + React for customisability or Framer for speed.",
-    img: "/info1.png",
+    img: "/images/retro-computer.png",
     alt: "info",
     num: 24,
     tag: "DV",
@@ -48,7 +54,7 @@ const content = [
   },
   {
     text: "Ship the finished product to a live site for your users to interact with.",
-    img: "/info1.png",
+    img: "/images/cloud-infra.png",
     alt: "info",
     num: 25,
     tag: "DE",
@@ -64,13 +70,13 @@ const renderTitle = (className: string) => (
 );
 
 const Info = () => {
+  const MotionImage = motion.create(Image);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { amount: 1 });
 
   const { x, y } = useMousePosition();
 
   const [selected, setSelected] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 for next, -1 for prev
   const item = content[selected];
 
   useAnimationFrame(() => {
@@ -91,8 +97,6 @@ const Info = () => {
   });
 
   const handleNext = () => {
-    setDirection(1);
-
     if (selected === content.length - 1) {
       setSelected(0);
       return;
@@ -102,8 +106,6 @@ const Info = () => {
   };
 
   const handlePrev = () => {
-    setDirection(-1);
-
     if (selected === 0) {
       setSelected(content.length - 1);
       return;
@@ -133,8 +135,7 @@ const Info = () => {
             <AnimatePresence mode="wait">
               <motion.div
                 key={selected}
-                custom={direction}
-                variants={variants}
+                variants={textVariants}
                 initial="initial"
                 animate={isInView ? "animate" : "initial"}
                 exit="exit"
@@ -142,12 +143,39 @@ const Info = () => {
                 className="flex flex-row justify-between px-2 pt-2 text-[var(--background)]"
               >
                 <p>{`[ ${item.tag} ]`}</p>
-
                 <p>{item.num}</p>
               </motion.div>
             </AnimatePresence>
+            <div className="relative m-2 rounded bg-black">
+              <MotionImage
+                // Motion props
+                key={selected}
+                variants={imgVariants}
+                initial="initial"
+                animate="animate"
+                transition={transition}
+                // Image props
+                alt={item.alt}
+                src={item.img}
+                width={1000}
+                height={1000}
+                className="scale-[80%] transform"
+                style={{ clipPath: "inset(2px)" }}
+              />
 
-            <Image alt={item.alt} src={item.img} width={1000} height={1000} />
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  zIndex: 3,
+                  backdropFilter: "blur(24px)",
+                  mask: "radial-gradient(circle, transparent 25%, rgb(0, 0, 0) 75%)",
+                }}
+              />
+            </div>
           </div>
 
           {/* Text container */}
@@ -173,7 +201,7 @@ const Info = () => {
                 <motion.h2
                   key={selected}
                   className="inline-block rounded-full bg-white px-3 py-2 text-sm text-black"
-                  variants={variants}
+                  variants={textVariants}
                   initial="initial"
                   animate={isInView ? "animate" : "initial"}
                   exit="exit"
