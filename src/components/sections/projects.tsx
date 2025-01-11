@@ -1,56 +1,80 @@
-import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useRef, useState } from "react";
+
+import { Image, ScrollControls, useScroll } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { easing } from "maath";
+import * as THREE from "three";
 
 import { CrosshairIcon } from "@/components/icons/CrosshairIcon";
 import { VerticalLines } from "@/components/lines";
 import { SectionTitle } from "@/components/text";
 import { Button } from "@/components/ui/button";
-import ProjectCard from "@/components/project-card";
+import "@/utils/3d-carousel";
 
-const getStyles = (active: number, index: number) => {
-  if (active === index)
-    return {
-      opacity: 1,
-      transform: "translateX(0px) translateZ(0px) rotateY(0deg)",
-      zIndex: 10,
-    };
-  else if (active - 1 === index)
-    return {
-      opacity: 1,
-      transform: "translateX(-240px) translateZ(-400px) rotateY(35deg)",
-      zIndex: 9,
-    };
-  else if (active + 1 === index)
-    return {
-      opacity: 1,
-      transform: "translateX(240px) translateZ(-400px) rotateY(-35deg)",
-      zIndex: 9,
-    };
-  else if (active - 2 === index)
-    return {
-      opacity: 1,
-      transform: "translateX(-480px) translateZ(-500px) rotateY(35deg)",
-      zIndex: 8,
-    };
-  else if (active + 2 === index)
-    return {
-      opacity: 1,
-      transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
-      zIndex: 8,
-    };
-  else if (index < active - 2)
-    return {
-      opacity: 0,
-      transform: "translateX(-480px) translateZ(-500px) rotateY(35deg)",
-      zIndex: 7,
-    };
-  else if (index > active + 2)
-    return {
-      opacity: 0,
-      transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
-      zIndex: 7,
-    };
-};
+function Card({ url, ...props }) {
+  const ref = useRef(null);
+  const [hovered, hover] = useState(false);
+  const pointerOver = (e) => (e.stopPropagation(), hover(true));
+  const pointerOut = () => hover(false);
+  useFrame((state, delta) => {
+    easing.damp3(ref.current.scale, hovered ? 1.15 : 1, 0.1, delta);
+    easing.damp(
+      ref.current.material,
+      "radius",
+      hovered ? 0.25 : 0.1,
+      0.2,
+      delta,
+    );
+    easing.damp(ref.current.material, "zoom", hovered ? 1 : 1.5, 0.2, delta);
+  });
+  return (
+    <Image
+      ref={ref}
+      alt=""
+      url={url}
+      transparent
+      side={THREE.DoubleSide}
+      onPointerOver={pointerOver}
+      onPointerOut={pointerOut}
+      {...props}
+    >
+      <bentPlaneGeometry args={[0.1, 1, 1, 20, 20]} />
+    </Image>
+  );
+}
+
+function Carousel({ radius = 1.4, count = 8 }) {
+  return Array.from({ length: count }, (_, i) => (
+    <Card
+      key={i}
+      url="/images/info1.png"
+      position={[
+        Math.sin((i / count) * Math.PI * 2) * radius,
+        0,
+        Math.cos((i / count) * Math.PI * 2) * radius,
+      ]}
+      rotation={[0, Math.PI + (i / count) * Math.PI * 2, 0]}
+    />
+  ));
+}
+
+function Rig(props) {
+  const ref = useRef(null);
+  const scroll = useScroll();
+  useFrame((state, delta) => {
+    ref.current.rotation.y = -scroll.offset * (Math.PI * 2); // Rotate contents
+    state.events.update(); // Raycasts every frame rather than on pointer-move
+    easing.damp3(
+      state.camera.position,
+      [-state.pointer.x * 2, state.pointer.y + 1.5, 10],
+      0.3,
+      delta,
+    ); // Move camera
+    state.camera.lookAt(0, 0, 0); // Look at center
+  });
+  return <group ref={ref} {...props} />;
+}
 
 const Projects = () => {
   const numProjects = 10;
@@ -79,6 +103,7 @@ const Projects = () => {
       </div>
     </div>
   );
+
   return (
     <>
       <VerticalLines />
@@ -86,18 +111,15 @@ const Projects = () => {
         <SectionTitle text="projects" />
       </div>
       <div className="no-scrollbar relative flex grow flex-row items-center justify-center gap-8 overflow-x-scroll pt-8">
-        {[...Array(numProjects).keys()].map((key) => (
-          <div
-            key={key}
-            style={{
-              ...getStyles(activeSlide, key),
-              boxShadow: `0 0 20px #FFF`,
-            }}
-            className="absolute top-0 transition-all"
-          >
-            <ProjectCard key={key} />
-          </div>
-        ))}
+        <Canvas camera={{ position: [0, 0, 100], fov: 15 }}>
+          {/* <fog attach="fog" args={["#a79", 8.5, 12]} /> */}
+          <ScrollControls pages={4} infinite>
+            <Rig rotation={[0, 0, 0.15]}>
+              <Carousel />
+            </Rig>
+          </ScrollControls>
+          {/* <Environment preset="city" background blur={0.5} /> */}
+        </Canvas>
       </div>
 
       {renderFooter()}
