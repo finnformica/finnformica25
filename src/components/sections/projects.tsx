@@ -1,12 +1,7 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useRef, useState } from "react";
 
-import {
-  Image,
-  ImageProps,
-  ScrollControls,
-  useScroll,
-} from "@react-three/drei";
+import { Image, ImageProps, OrbitControls } from "@react-three/drei";
 import { Canvas, GroupProps, ThreeEvent, useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import * as THREE from "three";
@@ -50,11 +45,13 @@ function Card({ url, ...props }: ImageProps & { url: string }) {
   );
 }
 
-function Carousel({ radius = 1.4, count = 8 }) {
+function Carousel({ count = 8 }) {
+  const radius = (count * 1.4) / (Math.PI * 2);
+
   return Array.from({ length: count }, (_, i) => (
     <Card
       key={i}
-      url="/images/info1.png"
+      url="/images/retro-computer.png"
       position={[
         Math.sin((i / count) * Math.PI * 2) * radius,
         0,
@@ -65,32 +62,14 @@ function Carousel({ radius = 1.4, count = 8 }) {
   ));
 }
 
-function Rig(props: GroupProps) {
-  const ref = useRef<THREE.Group>(null);
-  const scroll = useScroll();
-  useFrame((state, delta) => {
-    if (!ref.current || !state.events.update) return;
-
-    ref.current.rotation.y = -scroll.offset * (Math.PI * 2); // Rotate contents
-    state.events.update(); // Raycasts every frame rather than on pointer-move
-    easing.damp3(
-      state.camera.position,
-      [-state.pointer.x * 2, state.pointer.y + 1.5, 10],
-      0.3,
-      delta,
-    ); // Move camera
-    state.camera.lookAt(0, 0, 0); // Look at center
-  });
-  return <group {...props} ref={ref} />;
-}
-
 const Projects = () => {
   const numProjects = 10;
   const [activeSlide, setactiveSlide] = useState(0);
 
-  const prev = () => activeSlide > 0 && setactiveSlide(activeSlide - 1);
+  const prev = () =>
+    setactiveSlide(activeSlide > 0 ? activeSlide - 1 : numProjects - 1);
   const next = () =>
-    activeSlide < numProjects - 1 && setactiveSlide(activeSlide + 1);
+    setactiveSlide(activeSlide < numProjects - 1 ? activeSlide + 1 : 0);
 
   const renderFooter = () => (
     <div className="container mx-auto flex flex-col items-center gap-8 p-4 md:h-20 md:flex-row md:gap-0">
@@ -118,14 +97,27 @@ const Projects = () => {
         <SectionTitle text="projects" />
       </div>
       <div className="no-scrollbar relative flex grow flex-row items-center justify-center gap-8 overflow-x-scroll pt-8">
-        <Canvas camera={{ position: [0, 0, 100], fov: 15 }}>
-          <fog attach="fog" args={["#a79", 8.5, 12]} />
-          <ScrollControls pages={4} infinite>
-            <Rig rotation={[0, 0, 0.15]}>
-              <Carousel />
-            </Rig>
-          </ScrollControls>
-          {/* <Environment preset="city" background blur={0.5} /> */}
+        <Canvas
+          camera={{
+            position: [0, 0, 4],
+          }}
+        >
+          <OrbitControls
+            makeDefault
+            enableZoom={false}
+            autoRotate
+            enableDamping
+            minPolarAngle={Math.PI / 2}
+            maxPolarAngle={Math.PI / 2}
+          />
+          <mesh>
+            <sphereGeometry args={[0.9, 20, 20]} />
+            <meshBasicMaterial wireframe color="white" />
+          </mesh>
+
+          <group rotation={[0, 0, 0.15]}>
+            <Carousel count={numProjects} />
+          </group>
         </Canvas>
       </div>
 
