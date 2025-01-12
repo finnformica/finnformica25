@@ -16,5 +16,6 @@ declare module "@react-three/fiber" {
       typeof BentPlaneGeometry
     >;
     meshSineMaterial: Object3DNode<MeshSineMateriaa, typeof MeshSineMaterial>;
+    textGeometry: Object3DNode<TextGeometry, typeof TextGeometry>;
   }
 }
