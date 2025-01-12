@@ -147,21 +147,27 @@ const Info = () => {
               </motion.div>
             </AnimatePresence>
             <div className="relative m-2 rounded bg-black">
-              <MotionImage
-                // Motion props
-                key={selected}
-                variants={imgVariants}
-                initial="initial"
-                animate="animate"
-                transition={transition}
-                // Image props
-                alt={item.alt}
-                src={item.img}
-                width={1000}
-                height={1000}
-                className="scale-[80%] transform"
-                style={{ clipPath: "inset(2px)" }}
-              />
+              <AnimatePresence mode="wait">
+                <Image
+                  // Motion props
+                  // key={selected}
+                  // initial="initial"
+                  // animate="animate"
+                  // exit="exit"
+                  // variants={imgVariants}
+                  // transition={transition}
+                  // Image props
+                  alt={item.alt}
+                  src={item.img}
+                  width={1000}
+                  height={1000}
+                  className="scale-[80%] transform"
+                  style={{
+                    clipPath: "inset(2px)",
+                    imageRendering: "pixelated",
+                  }}
+                />
+              </AnimatePresence>
 
               <div
                 style={{
@@ -171,7 +177,7 @@ const Info = () => {
                   left: 0,
                   right: 0,
                   zIndex: 3,
-                  backdropFilter: "blur(24px)",
+                  backdropFilter: "blur(12px)",
                   mask: "radial-gradient(circle, transparent 25%, rgb(0, 0, 0) 75%)",
                 }}
               />
