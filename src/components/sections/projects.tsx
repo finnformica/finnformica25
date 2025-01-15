@@ -1,16 +1,63 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { Html, OrbitControls, Text3D } from "@react-three/drei";
-import { Canvas, GroupProps, ThreeEvent } from "@react-three/fiber";
+import { Image, ImageProps, OrbitControls, Text3D } from "@react-three/drei";
+import { Canvas, ThreeEvent, useFrame } from "@react-three/fiber";
+import { easing } from "maath";
 import * as THREE from "three";
 
 import { CrosshairIcon } from "@/components/icons/CrosshairIcon";
 import { VerticalLines } from "@/components/lines";
-import { SectionTitle } from "@/components/text";
 import { Button } from "@/components/ui/button";
 import "@/utils/3d-carousel";
-import Image from "next/image";
+
+type CardItem = {
+  url: string;
+  title: string;
+  description: string;
+  stack: string[];
+  link: string;
+};
+
+const projectCards: CardItem[] = [
+  {
+    url: "/projects/blockchange-img.png",
+    title: "BlockChange",
+    description: "A distributed crowdfunding platform for social causes",
+    stack: ["Next.js", "Solidity"],
+    link: "",
+  },
+  {
+    url: "/projects/financial-dashboard-img.png",
+    title: "Mock Financial Dashboard",
+    description:
+      "A mock financial dashboard with charts and graphs and a grid layout",
+    stack: ["Next.js", "Material-UI"],
+    link: "",
+  },
+  {
+    url: "/projects/gradguru.png",
+    title: "Gradguru",
+    description:
+      "Gradguru is a platform that helps students navigate the application process for graduate programs",
+    stack: ["Next.js", "Firebase", "Material-UI"],
+    link: "",
+  },
+  {
+    url: "/projects/lunaocean-img.png",
+    title: "lunaocean",
+    description: "An art portfolio website commissioned by an upcoming artist",
+    stack: ["Next.js", "Tailwind CSS"],
+    link: "",
+  },
+  {
+    url: "/projects/matrix-effect.png",
+    title: "Matrix Effect",
+    description: "A JavaScript based Matrix Screen effect using HTML5 Canvas",
+    stack: [],
+    link: "",
+  },
+];
 
 const Text = ({ children, font, ...props }: any) => (
   <Text3D
@@ -25,80 +72,58 @@ const Text = ({ children, font, ...props }: any) => (
   </Text3D>
 );
 
-function Card(props: GroupProps) {
-  const ref = useRef<THREE.Group>(null);
+function Card({ card, ...props }: ImageProps & { card: CardItem }) {
+  const ref = useRef<THREE.Mesh>(null);
   const [hovered, hover] = useState(false);
+
+  const { url } = card;
 
   const pointerOver = (e: ThreeEvent<PointerEvent>) => (
     e.stopPropagation(), hover(true)
   );
   const pointerOut = () => hover(false);
 
-  // useFrame((state, delta) => {
-  //   easing.damp3(ref.current!.scale, hovered ? 1.15 : 1, 0.1, delta);
-  //   easing.damp(
-  //     ref.current!.material,
-  //     "radius",
-  //     hovered ? 0.25 : 0.1,
-  //     0.2,
-  //     delta,
-  //   );
-  //   easing.damp(ref.current!.material, "zoom", hovered ? 1 : 1.5, 0.2, delta);
-  // });
+  useFrame((state, delta) => {
+    easing.damp3(ref.current!.scale, hovered ? 1.15 : 1, 0.1, delta);
+    easing.damp(
+      ref.current!.material,
+      "radius",
+      hovered ? 0.1 : 0.05,
+      0.2,
+      delta,
+    );
+    easing.damp(ref.current!.material, "zoom", hovered ? 1.1 : 0.9, 0.2, delta);
+  });
+
+  useEffect(() => {
+    document.body.style.cursor = hovered ? "pointer" : "auto";
+  }, [hovered]);
 
   return (
-    <group
+    // @ts-ignore
+    <Image
       ref={ref}
+      url={url}
+      transparent
+      side={THREE.DoubleSide}
       onPointerOver={pointerOver}
       onPointerOut={pointerOut}
       {...props}
     >
-      {/* <Text position={[0.0, -0.677, 0.01]}>Finn Formica</Text> */}
-      {/* <Text position={[-0.375, 0.715, 0.01]}>pickles</Text> */}
-      {/* <Text position={[-0.375, -0.677, 0.01]}>/94</Text> */}
-
-      <Html transform scale={0.1} occlude="blending">
-        <div className="prevent-select relative flex aspect-[3/4] h-96 flex-col rounded-lg bg-[var(--background-light)] p-1 transition-all hover:drop-shadow-white">
-          <h4>BlockChange</h4>
-          <Image
-            alt="Project BlockChange Image"
-            src="/projects/blockchange-img.png"
-            layout="fill"
-            objectFit="contain"
-            className="pointer-events-none"
-            draggable="false"
-          />
-          <p className="grow">
-            Dolor pariatur exercitation non in in. Dolore magna excepteur
-            laborum sit dolore adipisicing. In amet nisi aliquip nulla sunt
-            commodo ipsum officia laboris id reprehenderit Lorem duis ea. Et
-            consectetur deserunt commodo veniam.
-          </p>
-
-          <div className="flex flex-row gap-2">
-            {["GitHub", "Source"].map((text) => (
-              <p
-                key={text}
-                className="rounded-full border-1 border-[var(--foreground)] px-3 py-1 text-xs"
-              >
-                {text}
-              </p>
-            ))}
-          </div>
-        </div>
-      </Html>
-
-      <bentPlaneGeometry args={[0.1, 1, 1, 20, 20]} />
-    </group>
+      <bentPlaneGeometry args={[0.1, 1.5, 1, 20, 20]} />
+    </Image>
   );
 }
 
-function Carousel({ count = 8 }) {
-  const radius = (count * 1.6) / (Math.PI * 2);
+function Carousel({ cards }: { cards: CardItem[] }) {
+  const count = cards.length;
+  const radius = (count * 2.5) / (Math.PI * 2);
 
-  return Array.from({ length: count }, (_, i) => (
+  return cards.map((card, i) => (
+    // @ts-ignore
     <Card
       key={i}
+      card={card}
       position={[
         Math.sin((i / count) * Math.PI * 2) * radius,
         0,
@@ -147,7 +172,7 @@ const Projects = () => {
         <OrbitControls
           makeDefault
           enableZoom={false}
-          // autoRotate
+          autoRotate
           autoRotateSpeed={0.75}
           enableDamping
           minPolarAngle={Math.PI / 2}
@@ -169,7 +194,7 @@ const Projects = () => {
         </mesh>
 
         <group rotation={[0, 0, 0.1]}>
-          <Carousel count={numProjects} />
+          <Carousel cards={projectCards} />
         </group>
       </Canvas>
 
