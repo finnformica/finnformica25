@@ -11,7 +11,8 @@ export type CardProps = {
   title: string;
   description: string;
   stack: string[];
-  link: string;
+  link?: string;
+  github?: string;
 };
 
 export function Card({
