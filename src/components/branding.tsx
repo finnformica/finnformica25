@@ -21,7 +21,7 @@ export const Avatar = ({
       src="/images/finnformica-logo.png"
       alt="logo"
       fill
-      sizes="100vw"
+      sizes="160px"
       style={{ objectFit: "cover", borderRadius: rounded ? "50%" : "0%" }}
     />
   </motion.div>

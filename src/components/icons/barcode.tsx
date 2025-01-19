@@ -8,7 +8,7 @@ const Barcode = ({ className }: { className: string }) => {
         alt="barcode"
         src="/images/barcode.png"
         fill
-        sizes="100vw"
+        sizes="208px"
         style={{ objectFit: "contain" }}
       />
     </div>
