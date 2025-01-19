@@ -7,7 +7,7 @@ import * as THREE from "three";
 import { Text } from "./text";
 
 export type CardProps = {
-  url: string;
+  image: string;
   title: string;
   description: string;
   stack: string[];
@@ -23,7 +23,7 @@ export function Card({
   const ref = useRef<THREE.Mesh>(null);
   const [hovered, hover] = useState(false);
 
-  const { url } = card;
+  const { image } = card;
 
   const onPointerOver = (e: ThreeEvent<PointerEvent>) => (
     e.stopPropagation(), hover(true)
@@ -52,7 +52,7 @@ export function Card({
       {...{
         ...props,
         ref,
-        url,
+        url: image,
         transparent: true,
         side: THREE.DoubleSide,
         onPointerOver,
