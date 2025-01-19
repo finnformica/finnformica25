@@ -9,9 +9,10 @@ import { Text } from "./text";
 export type CardProps = {
   image: string;
   title: string;
+  subtitle: string;
   description: string;
   stack: string[];
-  link?: string;
+  source?: string;
   github?: string;
 };
 

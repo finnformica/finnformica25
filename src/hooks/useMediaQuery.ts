@@ -23,6 +23,7 @@ export function useMediaQuery(query: string) {
   return matches;
 }
 
+export const useIsScreenXs = () => useMediaQuery("(min-width: 560px)");
 export const useIsScreenSm = () => useMediaQuery("(min-width: 640px)");
 export const useIsScreenMd = () => useMediaQuery("(min-width: 768px)");
 export const useIsScreenLg = () => useMediaQuery("(min-width: 1024px)");

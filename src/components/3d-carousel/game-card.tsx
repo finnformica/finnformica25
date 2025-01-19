@@ -6,6 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { supplyMono } from "@/fonts";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 import { CardProps } from "./card-item";
@@ -38,6 +39,8 @@ type GameCardProps = {
 };
 
 const GameCard = ({ active, setActive, project }: GameCardProps) => {
+  const isScreenXs = useMediaQuery("(min-width: 400px)");
+
   const bgGradientColors =
     "from-[rgba(168,168,168,0.15)] to-[rgba(168,168,168,0)]";
   const bgGradientTr = `bg-gradient-to-tr ${bgGradientColors}`;
@@ -49,14 +52,10 @@ const GameCard = ({ active, setActive, project }: GameCardProps) => {
     "[clip-path:polygon(0_0,_0_100%,_130px_100%,_165px_43px,_100%_43px,_100%_0)]";
   const imgClipPath =
     "[clip-path:polygon(0_25px,_133px_25px,_168px_0,_100%_0,_100%_183px,_215px_183px,_180px_100%,_0_100%)]"; // assumed height of 208px from h-52
-  const descClipPath =
-    "[clip-path:polygon(0_25px,_180px_25px,_215px_0,_100%_0,_100%_100%,_0_100%)]";
   const footerClipPath =
     "[clip-path:polygon(0_0,_0_100%,_100%_100%,_100%_25px,_30%_25px,_21%_0)]";
 
   if (!project) return null;
-
-  console.log(project.image);
 
   return (
     <Dialog
@@ -79,30 +78,30 @@ const GameCard = ({ active, setActive, project }: GameCardProps) => {
                 {project.title}
               </DialogTitle>
               <DialogTitle className="pb-0.5 text-sm font-light text-muted-foreground">
-                For Charities
+                {project.subtitle}
               </DialogTitle>
             </DialogHeader>
 
             {/* Image */}
             <div
-              className={`h-52 w-full bg-cover bg-center object-contain ${imgClipPath} mt-[-32px]`}
+              className={`h-52 w-full bg-cover bg-center ${imgClipPath} mt-[-32px]`}
               style={{
                 backgroundImage: `url('${project.image}')`, // Tailwind throws an error if this is not in style
               }}
             />
 
             {/* Description */}
-            <div
-              className={`grow ${descClipPath} mt-[-34px] bg-[var(--background)]`}
-            >
-              <p className="pb-3 text-right text-lg">Description</p>
+            <div className="mt-[-34px] grow bg-[var(--background)]">
+              <p className="pb-3 text-right text-sm sm:text-lg">
+                {isScreenXs ? "Description" : "Desc"}
+              </p>
               <DialogDescription>{project.description}</DialogDescription>
             </div>
             {/* Stack / Footer */}
             <div
               className={`flex flex-col gap-3 rounded-b px-3 py-1 ${footerClipPath} ${bgGradientTr}`}
             >
-              <p className="pb-2 text-lg">Stack</p>
+              <p className="pb-2 text-sm sm:text-lg">Stack</p>
               <div className="flex justify-between">
                 {project.stack.map((item) => (
                   <p key={item} className="text-muted-foreground">
@@ -116,8 +115,8 @@ const GameCard = ({ active, setActive, project }: GameCardProps) => {
                   <ChipLink href={project.github}>GitHub</ChipLink>
                 )}
 
-                {project.link !== undefined && (
-                  <ChipLink href={project.link}>Source</ChipLink>
+                {project.source !== undefined && (
+                  <ChipLink href={project.source}>Source</ChipLink>
                 )}
               </div>
             </div>
