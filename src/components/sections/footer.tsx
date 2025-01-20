@@ -112,7 +112,7 @@ const Footer = () => {
       <div className="bg-[var(--foreground)] pb-1 pt-3">
         <Button
           size="default"
-          className="w-full cursor-pointer bg-[var(--background)] text-[var(--foreground)]"
+          className="w-full border-2 border-[var(--background)] bg-[var(--background)] text-base text-[var(--foreground)] hover:text-[var(--background)]"
         >
           Get in touch
         </Button>

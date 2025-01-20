@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta name="robots" content="all" />
       </Head>
-      <main className={`${supplyMono.className} font-sans`}>
+      <main className={supplyMono.className}>
         <Component {...pageProps} />
       </main>
     </>

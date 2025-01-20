@@ -6,6 +6,7 @@
   /* --background: #ffffff;
   --foreground: #171717; */
   --background: #0a0a0a;
+  --background-light: #1a1a1a;
   --foreground: #ededed;
   --primary: #82addc;
 
@@ -145,4 +146,13 @@ body {
     color-mix(in srgb, var(--background), transparent 30%),
     color-mix(in srgb, var(--background), transparent 90%) 25%
   );
+}
+
+.prevent-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

@@ -1,0 +1,130 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { supplyMono } from "@/fonts";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { cn } from "@/lib/utils";
+
+import { CardProps } from "./card-item";
+
+const ChipLink = ({
+  href,
+  children,
+  className,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <a
+    href={href}
+    target="_blank"
+    className={cn(
+      "rounded-full border px-4 py-0.5 text-sm transition-all hover:bg-[var(--foreground)] hover:text-[var(--background)]",
+      className,
+    )}
+  >
+    {children}
+  </a>
+);
+
+type GameCardProps = {
+  active: number | undefined;
+  setActive: (value: number | undefined) => void;
+  project: CardProps | undefined;
+};
+
+const GameCard = ({ active, setActive, project }: GameCardProps) => {
+  const isScreenXs = useMediaQuery("(min-width: 400px)");
+
+  const bgGradientColors =
+    "from-[rgba(168,168,168,0.15)] to-[rgba(168,168,168,0)]";
+  const bgGradientTr = `bg-gradient-to-tr ${bgGradientColors}`;
+  const bgGradientBr = `bg-gradient-to-br ${bgGradientColors}`;
+
+  // Clip paths for header, footer, and description
+  // Tab angle is 35px across (x) and 25px up (y)
+  const headerClipPath =
+    "[clip-path:polygon(0_0,_0_100%,_130px_100%,_165px_43px,_100%_43px,_100%_0)]";
+  const imgClipPath =
+    "[clip-path:polygon(0_25px,_133px_25px,_168px_0,_100%_0,_100%_183px,_215px_183px,_180px_100%,_0_100%)]"; // assumed height of 208px from h-52
+  const footerClipPath =
+    "[clip-path:polygon(0_0,_0_100%,_100%_100%,_100%_25px,_30%_25px,_21%_0)]";
+
+  if (!project) return null;
+
+  return (
+    <Dialog
+      open={active !== undefined}
+      onOpenChange={() => setActive(undefined)}
+    >
+      <DialogContent
+        className={supplyMono.className}
+        aria-describedby={project.description}
+      >
+        {/* Wrapper for content positioning */}
+        <div className="relative">
+          {/* Content container and border */}
+          <div className="absolute left-[50%] top-[50%] z-50 flex h-[50vh] min-h-[600px] w-full max-w-lg translate-x-[-50%] translate-y-[-50%] flex-col gap-3 rounded border bg-[var(--background)] p-6 shadow-lg sm:w-96">
+            {/* Title / Header */}
+            <DialogHeader
+              className={`rounded-t px-2 py-1 text-left ${bgGradientBr} ${headerClipPath}`}
+            >
+              <DialogTitle className="text-2xl tracking-wider">
+                {project.title}
+              </DialogTitle>
+              <DialogTitle className="pb-0.5 text-sm font-light text-muted-foreground">
+                {project.subtitle}
+              </DialogTitle>
+            </DialogHeader>
+
+            {/* Image */}
+            <div
+              className={`h-52 w-full bg-cover bg-center ${imgClipPath} mt-[-32px]`}
+              style={{
+                backgroundImage: `url('${project.image}')`, // Tailwind throws an error if this is not in style
+              }}
+            />
+
+            {/* Description */}
+            <div className="mt-[-34px] grow bg-[var(--background)]">
+              <p className="pb-3 text-right text-sm sm:text-lg">
+                {isScreenXs ? "Description" : "Desc"}
+              </p>
+              <DialogDescription>{project.description}</DialogDescription>
+            </div>
+            {/* Stack / Footer */}
+            <div
+              className={`flex flex-col gap-3 rounded-b px-3 py-1 ${footerClipPath} ${bgGradientTr}`}
+            >
+              <p className="pb-2 text-sm sm:text-lg">Stack</p>
+              <div className="flex justify-between">
+                {project.stack.map((item) => (
+                  <p key={item} className="text-muted-foreground">
+                    {item}
+                  </p>
+                ))}
+              </div>
+
+              <div className="mb-2 flex justify-evenly">
+                {project.github !== undefined && (
+                  <ChipLink href={project.github}>GitHub</ChipLink>
+                )}
+
+                {project.source !== undefined && (
+                  <ChipLink href={project.source}>Source</ChipLink>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default GameCard;

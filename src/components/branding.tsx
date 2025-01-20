@@ -18,10 +18,10 @@ export const Avatar = ({
     className={cn("relative rounded-full", className)}
   >
     <Image
-      src="/finnformica-logo.png"
+      src="/images/finnformica-logo.png"
       alt="logo"
       fill
-      sizes="100vw"
+      sizes="160px"
       style={{ objectFit: "cover", borderRadius: rounded ? "50%" : "0%" }}
     />
   </motion.div>
@@ -40,7 +40,7 @@ export const Banner = ({
   className?: string;
   innerClassName?: string;
 }) => (
-  <Marquee pauseOnHover numberOfCopies={3} className={className}>
+  <Marquee numberOfCopies={3} className={className}>
     <h1
       className={cn(
         `${outerSans.className} mb-[-12px] text-nowrap text-8xl font-black text-[var(--foreground)] sm:mb-[-16px] sm:text-9xl lg:mb-[-24px] lg:text-10xl`,

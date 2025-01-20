@@ -6,9 +6,9 @@ const Barcode = ({ className }: { className: string }) => {
     <div className={cn("h-6 w-52 sm:h-12", className)}>
       <Image
         alt="barcode"
-        src="/barcode.png"
+        src="/images/barcode.png"
         fill
-        sizes="100vw"
+        sizes="208px"
         style={{ objectFit: "contain" }}
       />
     </div>
