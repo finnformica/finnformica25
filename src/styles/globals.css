@@ -156,3 +156,8 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+.not-focus-visible:focus:not(:focus-visible) {
+  outline: 0;
+  box-shadow: none;
+}

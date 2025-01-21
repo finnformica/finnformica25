@@ -134,7 +134,7 @@ const GameCard = ({
             </div>
           </div>
 
-          <DialogClose className="absolute bottom-0 left-[50%] z-[100] translate-x-[-50%] translate-y-[50%] bg-[var(--background)]">
+          <DialogClose className="not-focus-visible absolute bottom-0 left-[50%] z-[100] translate-x-[-50%] translate-y-[50%] bg-[var(--background)]">
             <Button variant="outline" size="icon">
               <X className="h-4 w-4" />
               <span className="sr-only">Close</span>
