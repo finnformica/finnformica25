@@ -21,12 +21,30 @@ const Projects = () => {
   const [active, setActive] = useState<number | undefined>(undefined);
   const project = active !== undefined ? cards[active] : undefined;
 
+  const handleNext = () => {
+    if (active === undefined) return;
+
+    setActive((active + 1) % cards.length);
+  };
+
+  const handlePrev = () => {
+    if (active === undefined) return;
+
+    setActive((active - 1 + cards.length) % cards.length);
+  };
+
   return (
     <>
       <VerticalLines />
 
       <Model active={active} setActive={setActive} cards={cards} />
-      <GameCard active={active} setActive={setActive} project={project} />
+      <GameCard
+        active={active}
+        setActive={setActive}
+        project={project}
+        handleNext={handleNext}
+        handlePrev={handlePrev}
+      />
 
       <Footer />
     </>

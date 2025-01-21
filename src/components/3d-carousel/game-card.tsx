@@ -1,3 +1,5 @@
+import { ArrowLeft, ArrowRight, X } from "lucide-react";
+
 import {
   Dialog,
   DialogContent,
@@ -10,6 +12,8 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 import { CardProps } from "./card-item";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { Button } from "../ui/button";
 
 const ChipLink = ({
   href,
@@ -36,10 +40,18 @@ type GameCardProps = {
   active: number | undefined;
   setActive: (value: number | undefined) => void;
   project: CardProps | undefined;
+  handleNext: () => void;
+  handlePrev: () => void;
 };
 
-const GameCard = ({ active, setActive, project }: GameCardProps) => {
-  const isScreenXs = useMediaQuery("(min-width: 400px)");
+const GameCard = ({
+  active,
+  setActive,
+  project,
+  handleNext,
+  handlePrev,
+}: GameCardProps) => {
+  const isScreenXs = useMediaQuery("(min-width: 470px)");
 
   const bgGradientColors =
     "from-[rgba(168,168,168,0.15)] to-[rgba(168,168,168,0)]";
@@ -63,13 +75,13 @@ const GameCard = ({ active, setActive, project }: GameCardProps) => {
       onOpenChange={() => setActive(undefined)}
     >
       <DialogContent
-        className={supplyMono.className}
+        className={`${supplyMono.className} min-h-[600px] w-[80%] p-0 sm:w-96`}
         aria-describedby={project.description}
       >
         {/* Wrapper for content positioning */}
         <div className="relative">
           {/* Content container and border */}
-          <div className="absolute left-[50%] top-[50%] z-50 flex h-[50vh] min-h-[600px] w-full max-w-lg translate-x-[-50%] translate-y-[-50%] flex-col gap-3 rounded border bg-[var(--background)] p-6 shadow-lg sm:w-96">
+          <div className="absolute left-[50%] top-[50%] z-[100] flex h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col gap-3 rounded border bg-[var(--background)] p-6 shadow-lg">
             {/* Title / Header */}
             <DialogHeader
               className={`rounded-t px-2 py-1 text-left ${bgGradientBr} ${headerClipPath}`}
@@ -121,6 +133,31 @@ const GameCard = ({ active, setActive, project }: GameCardProps) => {
               </div>
             </div>
           </div>
+
+          <DialogClose className="absolute bottom-0 left-[50%] z-[100] translate-x-[-50%] translate-y-[50%] bg-[var(--background)]">
+            <Button variant="outline" size="icon">
+              <X className="h-4 w-4" />
+              <span className="sr-only">Close</span>
+            </Button>
+          </DialogClose>
+
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={handlePrev}
+            className="absolute left-0 top-[50%] z-[100] translate-x-[-50%] translate-y-[-50%] bg-[var(--background)] sm:translate-x-[-150%]"
+          >
+            <ArrowLeft />
+          </Button>
+
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={handleNext}
+            className="absolute right-0 top-[50%] z-[100] translate-x-[50%] translate-y-[-50%] bg-[var(--background)] sm:translate-x-[150%]"
+          >
+            <ArrowRight />
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
