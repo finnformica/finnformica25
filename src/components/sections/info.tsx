@@ -37,7 +37,7 @@ const transition = {
 
 const content = [
   {
-    text: "Focus on functional and intuitive user journeys throughout the application.",
+    text: "Designs focus on creating intuitive, user-centric journeys that ensure a seamless experience throughout the application and align with project goals.",
     img: "/images/goggles.png",
     alt: "info",
     num: 23,
@@ -45,7 +45,7 @@ const content = [
     header: "[ DS ] Design",
   },
   {
-    text: "Build solution using Next.js + React for customisability or Framer for speed.",
+    text: "Solutions are built using Next.js and React for full customisability, or Framer for faster delivery, depending on project requirements.",
     img: "/images/retro-computer.png",
     alt: "info",
     num: 24,
@@ -53,7 +53,7 @@ const content = [
     header: "[ DV ] Develop",
   },
   {
-    text: "Ship the finished product to a live site for your users to interact with.",
+    text: "The final product is deployed to a live environment, ensuring immediate access and smooth interaction for end users.",
     img: "/images/cloud-infra.png",
     alt: "info",
     num: 25,

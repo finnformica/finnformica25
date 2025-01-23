@@ -24,27 +24,27 @@ const Milestones = () => {
   const content = [
     {
       year: 2024,
-      text: "Work first job as a Software Developer & become GCP Engineer Certified",
+      text: "Begin my professional journey as a Software Developer and achieve certification as a Google Cloud Platform (GCP) Engineer.",
     },
     {
       year: 2023,
-      text: "Graduate from Financial Technology with Data Science MSc",
+      text: "Earn a MSc degree in Financial Technology with a specialisation in Data Science, solidifying my expertise in the field.",
+    },
+    {
+      year: 2023,
+      text: "Collaborate with clients as a freelance developer, delivering tailored UI/UX designs and React-based web applications.",
     },
     {
       year: 2022,
-      text: "Graduate from Mechanical and Electrical Engineering BEng",
+      text: "Complete my undergraduate studies with a BEng degree in Mechanical and Electrical Engineering, building a strong technical foundation.",
+    },
+    {
+      year: 2021,
+      text: "Launch my first end-to-end React web application, showcasing both dynamic front-end development and intuitive design.",
     },
     {
       year: 2020,
-      text: "Build first static websites",
-    },
-    {
-      year: 2018,
-      text: "Train first Machnie Learning model using NEAT algorithm",
-    },
-    {
-      year: 2016,
-      text: "Start programming journey with Python",
+      text: "Design and develop my first static websites, igniting my passion for web development and UI/UX design.",
     },
   ];
 
@@ -93,7 +93,10 @@ const Milestones = () => {
                   />
                 </MotionAccordionTrigger>
               </AnimatePresence>
-              <AccordionContent key={i} className="text-right md:text-lg">
+              <AccordionContent
+                key={i}
+                className="float-right text-right md:max-w-[80%] md:text-lg"
+              >
                 {item.text}
               </AccordionContent>
             </AccordionItem>

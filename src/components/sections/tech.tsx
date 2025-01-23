@@ -16,20 +16,17 @@ const Tech = () => {
     {
       caption: "Design",
       description:
-        "Design enthusiast with experience in creating user interfaces and user experiences. Proficient in tools such as Figma and Adobe XD.",
-      icon: null,
+        "Passionate about crafting intuitive and visually appealing user interfaces and experiences. Proficient in design tools like Figma and Adobe XD, with a focus on user-centered design principles.",
     },
     {
       caption: "Full-stack",
       description:
-        "Full-stack developer with experience in building and deploying web applications. Proficient in both front-end and back-end technologies such as React, Node.js, and Django.",
-      icon: null,
+        "Experienced full-stack developer specializing in building and deploying scalable web applications. Skilled in front-end frameworks like React and back-end technologies including Node.js, and Django.",
     },
     {
       caption: "Cloud",
       description:
-        "Google Cloud certified engineer with experience in deploying and managing cloud infrastructure.",
-      icon: null,
+        "Google Cloud Platform (GCP) certified engineer with expertise in designing, deploying, and managing cloud-based infrastructure and services. Skilled in leveraging cloud-native solutions for scalable applications.",
     },
   ];
 

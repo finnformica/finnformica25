@@ -5,7 +5,8 @@ export const cards: CardProps[] = [
     image: "/projects/blockchange-img.png",
     title: "BlockChange",
     subtitle: "For Charities",
-    description: "A distributed crowdfunding platform for social causes",
+    description:
+      "A distributed crowdfunding platform designed to empower social causes through blockchain technology. It ensures transparency and trust by leveraging Solidity and a modern Next.js front-end.",
     stack: ["Next.js", "Solidity", "Material-UI"],
     github: "https://github.com/finnformica/blockchange-frontend",
     source: "https://blockchange.vercel.app/",
@@ -13,9 +14,9 @@ export const cards: CardProps[] = [
   {
     image: "/projects/financial-dashboard-img.png",
     title: "Financial Dashboard",
-    subtitle: "Having Fun",
+    subtitle: "Exploring Data",
     description:
-      "A mock financial dashboard with charts and graphs and a grid layout",
+      "A mock financial dashboard featuring interactive charts, graphs, and a grid layout. Built to explore data visualisation and responsive UI design using Chart.js and Material-UI.",
     stack: ["Next.js", "Material-UI", "Chart.js"],
     github: "https://github.com/finnformica/financial-dashboard",
     source: "https://financial-dashboard-finnformica.vercel.app/",
@@ -23,18 +24,20 @@ export const cards: CardProps[] = [
   {
     image: "/projects/gradguru.png",
     title: "Gradguru",
-    subtitle: "For Students",
+    subtitle: "Guiding Students",
     description:
-      "Gradguru is a platform that helps students navigate the application process for graduate programs",
+      "Gradguru simplifies the graduate application process by offering students a centralised platform for resources and guidance, combining Firebase for scalability and a clean, modern Next.js interface.",
     stack: ["Next.js", "Firebase", "Material-UI"],
-    source: "https://github.com/finnformica/gradguru",
-    github: "https://www.gradguru.app/",
+    source: "https://www.gradguru.app/",
+    github: "https://github.com/finnformica/gradguru",
   },
   {
     image: "/projects/lunaocean-img.png",
     title: "lunaocean",
     subtitle: "Commission Work",
-    description: "An art portfolio website commissioned by an upcoming artist",
+    description:
+      "A sleek and responsive art portfolio website created for an emerging artist, built with Tailwind CSS for a polished and visually appealing design.",
+
     stack: ["Next.js", "Tailwind CSS"],
     github: "https://github.com/finnformica/lunaocean",
     source: "https://lunaocean.vercel.app",
@@ -43,7 +46,8 @@ export const cards: CardProps[] = [
     image: "/projects/matrix-effect.png",
     title: "Matrix Effect",
     subtitle: "Having Fun",
-    description: "A JavaScript based Matrix Screen effect using HTML5 Canvas",
+    description:
+      "A fun project recreating the iconic Matrix screen effect using HTML5 Canvas and JavaScript, exploring animation techniques and creative coding principles.",
     stack: ["JavaScript", "canvas-sketch"],
     github: "https://github.com/finnformica/matrix-effect",
   },

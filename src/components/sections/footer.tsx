@@ -56,9 +56,8 @@ const Footer = () => {
               </span>
 
               <StaggeredText className="gradient md:grow-0 md:text-xl">
-                I hope my work has inspired you and I&apos;d love to hear from
-                you. Let&apos;s connect and explore incredible possibilities
-                together.
+                I hope my work has inspired you. Let's connect and explore
+                exciting possibilities together.
               </StaggeredText>
 
               <Initials />
@@ -77,7 +76,7 @@ const Footer = () => {
                     key={i}
                     variants={variants}
                     transition={{
-                      duration: 1,
+                      duration: 0.25,
                       delay: i * 0.25,
                       ease: "easeInOut",
                     }}
@@ -97,7 +96,7 @@ const Footer = () => {
                 ))}
               </motion.div>
               <StaggeredText
-                staggerChildren={0.2}
+                staggerChildren={0.1}
                 className="pb-0.5 text-center text-xs text-gray-200 md:whitespace-nowrap md:text-right md:text-sm"
               >
                 Made by @finnformica using Next.js, Tailwind, Motion, and R3F

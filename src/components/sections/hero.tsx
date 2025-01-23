@@ -41,14 +41,14 @@ const Hero = () => {
               </span>
               <HackerText
                 text="My name is Finn."
-                className="drop-shadow-white text-2xl md:text-5xl lg:whitespace-nowrap"
+                className="text-2xl drop-shadow-white md:text-5xl lg:whitespace-nowrap"
               />
             </div>
 
             {/* Body */}
             <StaggeredText className="gradient grow text-sm sm:text-base md:grow-0">
-              My unique skill and interest in Data Science, Development and AI
-              equips me to provide cutting edge solutions in new dynamic fields.
+              Combining expertise in design and development to craft intuitive
+              and scalable digital solutions.
             </StaggeredText>
 
             {/* CTA */}
