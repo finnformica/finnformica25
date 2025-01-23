@@ -37,7 +37,10 @@ const Projects = () => {
     <>
       <VerticalLines />
 
-      <Model active={active} setActive={setActive} cards={cards} />
+      <div className="grow">
+        <Model active={active} setActive={setActive} cards={cards} />
+      </div>
+
       <GameCard
         active={active}
         setActive={setActive}

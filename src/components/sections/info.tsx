@@ -123,7 +123,7 @@ const Info = () => {
         <CrosshairIcons className="h-10 sm:h-40" />
 
         {/* Content container */}
-        <div className="flex grow flex-col items-center justify-center gap-6 sm:justify-evenly md:flex-row md:gap-4 md:px-2">
+        <div className="flex grow flex-col items-center justify-around md:flex-row md:gap-4 md:px-2">
           {/* Small screen section title */}
           {renderTitle("md:hidden w-full m-0")}
 
@@ -140,7 +140,7 @@ const Info = () => {
                 animate={isInView ? "animate" : "initial"}
                 exit="exit"
                 transition={transition}
-                className="flex flex-row justify-between px-2 pt-2 text-[var(--background)]"
+                className="flex flex-row justify-between px-2 pt-2 text-xs text-[var(--background)] md:text-base"
               >
                 <p>{`[ ${item.tag} ]`}</p>
                 <p>{item.num}</p>
@@ -185,10 +185,10 @@ const Info = () => {
           </div>
 
           {/* Text container */}
-          <div className="z-10 w-3/4 sm:h-full md:w-[40%] md:text-right">
+          <div className="z-10 w-full px-4 sm:h-full md:w-[40%] md:px-0 md:text-right">
             {renderTitle("hidden md:block")}
 
-            <StaggeredText key={selected} className="md:text-lg">
+            <StaggeredText key={selected} className="text-sm md:text-lg">
               {item.text}
             </StaggeredText>
 
