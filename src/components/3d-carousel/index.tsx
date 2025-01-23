@@ -1,6 +1,8 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
+import _ from "lodash";
+
 import { Card, CardProps } from "./card-item";
 import { Text } from "./text";
 import "./bent-plane-geometry";
@@ -39,14 +41,21 @@ type ModelProps = {
 const Model = ({ active, setActive, cards }: ModelProps) => {
   const Y_OFFSET = 0.25;
 
-  const handleClick = (index: number) => {
-    if (active === undefined) {
-      setActive(index);
-      return;
-    }
+  const handleClick = _.throttle(
+    (index: number) => {
+      console.log("active", active);
+      console.log("index", index);
 
-    setActive(undefined);
-  };
+      if (active === undefined) {
+        setActive(index);
+        return;
+      }
+
+      setActive(undefined);
+    },
+    500,
+    { leading: true },
+  );
 
   return (
     <Canvas camera={{ position: [0, 0, 4] }}>
