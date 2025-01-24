@@ -10,7 +10,7 @@ import { VerticalLines } from "@/components/lines";
 import { useIsScreenSm } from "@/hooks/useMediaQuery";
 import { Button } from "../ui/button";
 import { ArrowDown } from "lucide-react";
-import { scroll } from "@/lib/utils";
+import { scrollToSection } from "@/lib/utils";
 
 const Projects = () => {
   const isScreenSm = useIsScreenSm();
@@ -65,7 +65,7 @@ const Projects = () => {
             <Button
               variant="outline"
               size="icon"
-              onClick={() => scroll("#tech")}
+              onClick={() => scrollToSection("#tech")}
             >
               <ArrowDown />
             </Button>

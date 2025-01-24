@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import { VerticalLines } from "@/components/lines";
 import { HackerText, StaggeredText } from "@/components/text";
 import { Button } from "@/components/ui/button";
+import { scrollToSection } from "@/lib/utils";
 
 const Hero = () => {
   const MotionButton = motion.create(Button);
@@ -48,6 +49,7 @@ const Hero = () => {
               animate={{ width: "100%", opacity: 1 }}
               variant="outline"
               className="mx-auto w-full"
+              onClick={() => scrollToSection("#projects")}
             >
               See Work
             </MotionButton>

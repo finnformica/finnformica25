@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function scroll(id: string) {
+export function scrollToSection(id: string) {
   const nextSection = document.querySelector(id);
   nextSection?.scrollIntoView({ behavior: "smooth", block: "start" });
 }

@@ -3,13 +3,13 @@ import Link from "next/link";
 import { Initials } from "@/components/branding";
 import { CrosshairIcon } from "@/components/icons/CrosshairIcon";
 import { RollingText } from "@/components/text";
-import { scroll } from "@/lib/utils";
+import { scrollToSection } from "@/lib/utils";
 
 const Header = () => (
   <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light z-40 hidden w-full md:block">
       <div className="container mx-auto flex w-full flex-row justify-between py-4">
-        <a onClick={() => scroll("#info")}>
+        <a onClick={() => scrollToSection("#info")}>
           <RollingText text="info" className="cursor-pointer" />
         </a>
 
@@ -23,7 +23,7 @@ const Header = () => (
           <CrosshairIcon />
         </div>
 
-        <a onClick={() => scroll("#projects")}>
+        <a onClick={() => scrollToSection("#projects")}>
           <RollingText text="projects" className="cursor-pointer" />
         </a>
       </div>
