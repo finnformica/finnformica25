@@ -86,10 +86,10 @@ const GameCard = ({
             <DialogHeader
               className={`rounded-t px-2 py-1 text-left ${bgGradientBr} ${headerClipPath}`}
             >
-              <DialogTitle className="text-2xl tracking-wider">
+              <DialogTitle className="tracking-wider md:text-2xl">
                 {project.title}
               </DialogTitle>
-              <DialogTitle className="pb-0.5 text-sm font-light text-muted-foreground">
+              <DialogTitle className="pb-0.5 text-xs font-light text-muted-foreground md:text-sm">
                 {project.subtitle}
               </DialogTitle>
             </DialogHeader>
@@ -107,7 +107,9 @@ const GameCard = ({
               <p className="pb-3 text-right text-sm sm:text-lg">
                 {isScreenXs ? "Description" : "Desc"}
               </p>
-              <DialogDescription>{project.description}</DialogDescription>
+              <DialogDescription className="text-xs md:text-base">
+                {project.description}
+              </DialogDescription>
             </div>
             {/* Stack / Footer */}
             <div
@@ -116,7 +118,10 @@ const GameCard = ({
               <p className="pb-2 text-sm sm:text-lg">Stack</p>
               <div className="flex justify-between">
                 {project.stack.map((item) => (
-                  <p key={item} className="text-muted-foreground">
+                  <p
+                    key={item}
+                    className="text-sm text-muted-foreground md:text-base"
+                  >
                     {item}
                   </p>
                 ))}
