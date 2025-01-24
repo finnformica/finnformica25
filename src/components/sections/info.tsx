@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import useMousePosition from "@/hooks/useMousePosition";
 import { cn } from "@/lib/utils";
 
+const MotionImage = motion.create(Image); // Init outside of component to avoid re-creating on each render
+
 const textVariants: Variants = {
   initial: { opacity: 0, y: -10 },
   animate: { opacity: 1, y: 0 },
@@ -70,7 +72,6 @@ const renderTitle = (className: string) => (
 );
 
 const Info = () => {
-  const MotionImage = motion.create(Image);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { amount: 1 });
 
@@ -148,24 +149,21 @@ const Info = () => {
             </AnimatePresence>
             <div className="relative m-2 rounded bg-black">
               <AnimatePresence mode="wait">
-                <Image
+                <MotionImage
                   // Motion props
-                  // key={selected}
-                  // initial="initial"
-                  // animate="animate"
-                  // exit="exit"
-                  // variants={imgVariants}
-                  // transition={transition}
+                  key={selected}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={imgVariants}
+                  transition={transition}
                   // Image props
                   alt={item.alt}
                   src={item.img}
                   width={1000}
                   height={1000}
                   className="scale-[80%] transform"
-                  style={{
-                    clipPath: "inset(2px)",
-                    imageRendering: "pixelated",
-                  }}
+                  style={{ clipPath: "inset(2px)" }}
                 />
               </AnimatePresence>
 
