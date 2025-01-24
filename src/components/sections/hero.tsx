@@ -9,18 +9,9 @@ import { Button } from "@/components/ui/button";
 const Hero = () => {
   const MotionButton = motion.create(Button);
   const tags = [
-    {
-      name: "Design",
-      tag: "DS",
-    },
-    {
-      name: "Develop",
-      tag: "DV",
-    },
-    {
-      name: "Deploy",
-      tag: "DE",
-    },
+    { name: "Design", tag: "DS" },
+    { name: "Develop", tag: "DV" },
+    { name: "Deploy", tag: "DE" },
   ];
 
   return (

@@ -41,6 +41,7 @@ body {
   color: var(--foreground);
   background: var(--foreground);
   font-family: var(--font-supply-mono), sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {

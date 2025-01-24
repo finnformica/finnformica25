@@ -21,6 +21,7 @@ export default function Home() {
         <section
           key={i}
           className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-4 bg-[var(--background)] sm:border-8 sm:border-[var(--foreground)]"
+          id={comp.key ?? ""}
         >
           {comp}
         </section>
