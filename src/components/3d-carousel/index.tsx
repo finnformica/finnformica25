@@ -43,9 +43,6 @@ const Model = ({ active, setActive, cards }: ModelProps) => {
 
   const handleClick = _.throttle(
     (index: number) => {
-      console.log("active", active);
-      console.log("index", index);
-
       if (active === undefined) {
         setActive(index);
         return;
@@ -53,8 +50,8 @@ const Model = ({ active, setActive, cards }: ModelProps) => {
 
       setActive(undefined);
     },
-    500,
-    { leading: true },
+    200,
+    { trailing: false }, // Prevents the function from being called more than once every 500ms
   );
 
   return (
