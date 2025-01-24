@@ -54,7 +54,7 @@ const GameCard = ({
   const isScreenXs = useMediaQuery("(min-width: 470px)");
 
   const bgGradientColors =
-    "from-[rgba(168,168,168,0.15)] to-[rgba(168,168,168,0)]";
+    "from-[rgba(200,200,200,0.15)] to-[rgba(200,200,200,0)]";
   const bgGradientTr = `bg-gradient-to-tr ${bgGradientColors}`;
   const bgGradientBr = `bg-gradient-to-br ${bgGradientColors}`;
 

@@ -163,7 +163,10 @@ const Info = () => {
                   width={1000}
                   height={1000}
                   className="scale-[80%] transform"
-                  style={{ clipPath: "inset(2px)" }}
+                  style={{
+                    clipPath: "inset(2px)",
+                    filter: "sepia(90%) saturate(300%) hue-rotate(240deg)",
+                  }}
                 />
               </AnimatePresence>
 
