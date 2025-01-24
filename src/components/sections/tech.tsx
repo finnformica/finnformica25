@@ -21,7 +21,7 @@ const Tech = () => {
     {
       caption: "Full-stack",
       description:
-        "Experienced full-stack developer specializing in building and deploying scalable web applications. Skilled in front-end frameworks like React and back-end technologies including Node.js, and Django.",
+        "Experienced full-stack developer specialising in building and deploying scalable web applications. Skilled in front-end frameworks like React and back-end technologies including Node.js, and Django.",
     },
     {
       caption: "Cloud",

@@ -120,17 +120,17 @@ const Info = () => {
       <WireframeLine orientation="h" className="top-1/2" />
 
       <div className="container mx-auto flex grow flex-col">
-        <CrosshairIcons className="h-10 sm:h-40" />
+        <CrosshairIcons className="h-10 lg:h-40" />
 
         {/* Content container */}
-        <div className="flex grow flex-col items-center justify-around md:flex-row md:gap-4 md:px-2">
+        <div className="flex grow flex-col items-center justify-around lg:flex-row lg:gap-4 lg:px-2">
           {/* Small screen section title */}
-          {renderTitle("md:hidden w-full m-0")}
+          {renderTitle("lg:hidden w-full m-0")}
 
           {/* Image container */}
           <div
             ref={ref}
-            className="w-3/4 translate-x-40 rounded-lg bg-[var(--foreground)] md:w-1/2 xl:w-[40%]"
+            className="w-3/4 translate-x-40 rounded-lg bg-[var(--foreground)] lg:w-1/2 xl:w-[40%]"
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -140,7 +140,7 @@ const Info = () => {
                 animate={isInView ? "animate" : "initial"}
                 exit="exit"
                 transition={transition}
-                className="flex flex-row justify-between px-2 pt-2 text-xs text-[var(--background)] md:text-base"
+                className="flex flex-row justify-between px-2 pt-2 text-xs text-[var(--background)] lg:text-base"
               >
                 <p>{`[ ${item.tag} ]`}</p>
                 <p>{item.num}</p>
@@ -185,10 +185,10 @@ const Info = () => {
           </div>
 
           {/* Text container */}
-          <div className="z-10 w-full px-4 sm:h-full md:w-[40%] md:px-0 md:text-right">
-            {renderTitle("hidden md:block")}
+          <div className="z-10 w-full px-4 lg:w-[40%] lg:px-0 lg:text-right">
+            {renderTitle("hidden lg:block")}
 
-            <StaggeredText key={selected} className="text-sm md:text-lg">
+            <StaggeredText key={selected} className="text-sm lg:text-lg">
               {item.text}
             </StaggeredText>
 
@@ -220,7 +220,7 @@ const Info = () => {
           </div>
         </div>
 
-        <CrosshairIcons className="h-10 sm:h-40" />
+        <CrosshairIcons className="h-10 lg:h-40" />
       </div>
     </>
   );
