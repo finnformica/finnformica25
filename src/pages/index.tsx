@@ -20,7 +20,7 @@ export default function Home() {
       {sections.map((comp, i) => (
         <section
           key={i}
-          className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-4 bg-[var(--background)] sm:border-8 sm:border-[var(--foreground)]"
+          className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-4 border-[var(--foreground)] bg-[var(--background)] sm:border-8"
           id={comp.key ?? ""}
         >
           {comp}
