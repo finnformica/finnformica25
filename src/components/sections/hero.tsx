@@ -28,7 +28,7 @@ const Hero = () => {
           <div className="flex w-full grow flex-col justify-center gap-8 px-4 md:w-1/2 md:px-0">
             {/* Title */}
             <div className="flex flex-col">
-              <span className="pb-0.5 text-xs text-gray-400 md:text-sm">
+              <span className="pb-0.5 text-xs text-zinc-400 md:text-sm">
                 Hello World.
               </span>
               <HackerText

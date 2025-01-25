@@ -81,7 +81,7 @@ const GameCard = ({
         {/* Wrapper for content positioning */}
         <div className="relative">
           {/* Content container and border */}
-          <div className="absolute left-[50%] top-[50%] z-[100] flex h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col gap-3 rounded border bg-[var(--background)] p-6 shadow-lg">
+          <div className="absolute left-[50%] top-[50%] z-[100] flex h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col gap-3 rounded border border-[var(--foreground)] bg-[var(--background)] p-6 shadow-lg">
             {/* Title / Header */}
             <DialogHeader
               className={`rounded-t px-2 py-1 text-left ${bgGradientBr} ${headerClipPath}`}

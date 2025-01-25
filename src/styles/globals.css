@@ -6,7 +6,6 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  --background-light: #ffffff;
   --primary: #82addc;
 
   --divider: rgba(139, 139, 139, 0.1);
@@ -15,8 +14,27 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --background-light: #1a1a1a;
     --foreground: #ededed;
+  }
+
+  /* Only gradient text in dark mode */
+  .gradient {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .gradient::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    z-index: 10;
+    pointer-events: none;
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--background), transparent 30%),
+      color-mix(in srgb, var(--background), transparent 90%) 25%
+    );
   }
 }
 
@@ -124,25 +142,6 @@ body {
 }
 
 /* Globally used styles */
-
-.gradient {
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.gradient::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  z-index: 10;
-  pointer-events: none;
-  background: linear-gradient(
-    to right,
-    color-mix(in srgb, var(--background), transparent 30%),
-    color-mix(in srgb, var(--background), transparent 90%) 25%
-  );
-}
 
 .prevent-select {
   -webkit-touch-callout: none;
