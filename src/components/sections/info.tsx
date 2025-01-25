@@ -207,7 +207,7 @@ const Info = () => {
               <AnimatePresence mode="wait">
                 <motion.h2
                   key={selected}
-                  className="inline-block rounded-full bg-white px-3 py-2 text-sm text-black"
+                  className="inline-block rounded-full bg-[var(--foreground)] px-3 py-2 text-sm text-[var(--background)]"
                   variants={textVariants}
                   initial="initial"
                   animate={isInView ? "animate" : "initial"}

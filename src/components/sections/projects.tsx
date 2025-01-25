@@ -44,7 +44,7 @@ const Projects = () => {
 
       <div
         className="relative grow"
-        style={!isScreenSm ? { height: window.innerHeight - 100 } : {}}
+        style={!isScreenSm ? { height: window.innerHeight - 100 } : {}} // Set height on mobile devices to allow canvas to grow
       >
         <Model active={active} setActive={setActive} cards={cards} />
       </div>

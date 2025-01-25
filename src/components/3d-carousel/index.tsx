@@ -6,6 +6,7 @@ import _ from "lodash";
 import { Card, CardProps } from "./card-item";
 import { Text } from "./text";
 import "./bent-plane-geometry";
+import { getRootStyle } from "@/lib/utils";
 
 type CarouselProps = {
   cards: CardProps[];
@@ -40,6 +41,7 @@ type ModelProps = {
 
 const Model = ({ active, setActive, cards }: ModelProps) => {
   const Y_OFFSET = 0.25;
+  const foregroundColor = getRootStyle("--foreground");
 
   const handleClick = _.throttle(
     (index: number) => {
@@ -77,7 +79,7 @@ const Model = ({ active, setActive, cards }: ModelProps) => {
 
       <mesh position={[0, -Y_OFFSET, 0]}>
         <sphereGeometry args={[0.9, 20, 20]} />
-        <meshBasicMaterial wireframe color="white" />
+        <meshBasicMaterial wireframe color={foregroundColor} />
       </mesh>
 
       <group rotation={[0, 0, 0.1]} position={[0, -Y_OFFSET, 0]}>

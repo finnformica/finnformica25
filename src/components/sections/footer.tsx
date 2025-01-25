@@ -51,8 +51,8 @@ const Footer = () => {
           <div className="flex grow flex-col px-8 sm:px-0 md:flex-row">
             {/* Text content */}
             <div className="flex grow flex-col gap-2 md:gap-6 md:pl-4">
-              <span className="pb-0.5 text-xs text-gray-400 md:text-sm">
-                Thank you, for checking out my site.
+              <span className="pb-0.5 text-xs text-zinc-400 md:text-sm">
+                Thank you for checking out my site
               </span>
 
               <StaggeredText className="gradient md:grow-0 md:text-xl">
@@ -97,7 +97,7 @@ const Footer = () => {
               </motion.div>
               <StaggeredText
                 staggerChildren={0.1}
-                className="pb-0.5 text-center text-xs text-gray-200 md:whitespace-nowrap md:text-right md:text-sm"
+                className="pb-0.5 text-center text-xs text-[var(--foreground)] opacity-80 md:whitespace-nowrap md:text-right md:text-sm"
               >
                 Made by @finnformica using Next.js, Tailwind, Motion, and R3F
               </StaggeredText>
@@ -109,12 +109,14 @@ const Footer = () => {
 
       {/* CTA */}
       <div className="bg-[var(--foreground)] pb-1 pt-3">
-        <Button
-          size="default"
-          className="w-full border-2 border-[var(--background)] bg-[var(--background)] text-base text-[var(--foreground)] hover:text-[var(--background)]"
-        >
-          Get in touch
-        </Button>
+        <a href="mailto:hello@finnformica.com" target="_blank">
+          <Button
+            size="default"
+            className="w-full border-2 border-[var(--background)] bg-[var(--background)] text-base text-[var(--foreground)] hover:text-[var(--background)]"
+          >
+            Get in touch
+          </Button>
+        </a>
       </div>
     </div>
   );

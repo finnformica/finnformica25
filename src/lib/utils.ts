@@ -9,3 +9,9 @@ export function scrollToSection(id: string) {
   const nextSection = document.querySelector(id);
   nextSection?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+export function getRootStyle(cssVar: string) {
+  // retrieve the text colour from root styles
+  const root = document.documentElement;
+  return getComputedStyle(root).getPropertyValue(cssVar);
+}

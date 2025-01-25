@@ -28,7 +28,7 @@ const ChipLink = ({
     href={href}
     target="_blank"
     className={cn(
-      "rounded-full border px-4 py-0.5 text-sm transition-all hover:bg-[var(--foreground)] hover:text-[var(--background)]",
+      "rounded-full border border-[var(--foreground)] px-4 py-0.5 text-sm transition-all hover:bg-[var(--foreground)] hover:text-[var(--background)]",
       className,
     )}
   >
@@ -139,8 +139,12 @@ const GameCard = ({
             </div>
           </div>
 
-          <DialogClose className="not-focus-visible absolute bottom-0 left-[50%] z-[100] translate-x-[-50%] translate-y-[50%] bg-[var(--background)]">
-            <Button variant="outline" size="icon">
+          <DialogClose className="not-focus-visible absolute bottom-0 left-[50%] z-[100] translate-x-[-50%] translate-y-[50%]">
+            <Button
+              variant="outline"
+              size="icon"
+              className="bg-[var(--background)]"
+            >
               <X className="h-4 w-4" />
               <span className="sr-only">Close</span>
             </Button>
