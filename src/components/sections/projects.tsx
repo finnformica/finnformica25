@@ -9,7 +9,7 @@ import { CrosshairIcon } from "@/components/icons/CrosshairIcon";
 import { VerticalLines } from "@/components/lines";
 import { useIsScreenSm } from "@/hooks/useMediaQuery";
 import { Button } from "../ui/button";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
 
 const Projects = () => {
@@ -62,13 +62,22 @@ const Projects = () => {
         <div className="flex w-full flex-row items-center justify-between md:w-auto md:basis-1/2 md:justify-around">
           <CrosshairIcon />
           {!isScreenSm && (
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => scrollToSection("#tech")}
-            >
-              <ArrowDown />
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => scrollToSection("#info")}
+              >
+                <ArrowUp />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => scrollToSection("#tech")}
+              >
+                <ArrowDown />
+              </Button>
+            </div>
           )}
           <CrosshairIcon />
         </div>
