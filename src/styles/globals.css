@@ -156,21 +156,3 @@ body {
   outline: 0;
   box-shadow: none;
 }
-
-.circle {
-  position: fixed;
-  z-index: 100;
-  display: flex;
-  flex-flow: row;
-  align-content: center;
-  justify-content: center;
-  top: 0;
-  left: 0;
-  height: 10px;
-  width: 10px;
-  border-radius: 200px;
-  pointer-events: none;
-  color: #fff;
-  text-align: center;
-  font-size: 16px;
-}

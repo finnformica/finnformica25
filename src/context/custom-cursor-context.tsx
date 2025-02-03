@@ -59,14 +59,14 @@ const CustomCursorProvider = ({
       height: 50,
       width: 50,
       fontSize: "12px",
-      x: mouseXPosition,
-      y: mouseYPosition,
+      x: mouseXPosition - 20,
+      y: mouseYPosition - 20,
     },
     rotate: {
       opacity: 1,
       backgroundColor: "transparent",
-      height: 100,
-      width: 100,
+      height: 75,
+      width: 75,
       scale: 1,
       fontSize: "18px",
       x: mouseXPosition - 45,
@@ -99,11 +99,13 @@ const CustomCursorProvider = ({
     <CustomCursor.Provider value={value}>
       <motion.div
         variants={variants}
-        className="circle"
+        className="pointer-events-none fixed left-0 top-0 z-[100] h-[10px] w-[10px] rounded-full"
         animate={cursorVariant}
       >
         {cursorVariant === "rotate" ? (
           <svg
+            width="100"
+            height="100"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className="animate-spin-slow"
@@ -130,9 +132,11 @@ const CustomCursorProvider = ({
             </text>
           </svg>
         ) : (
-          <span className="pointer-events-none m-auto flex-auto text-inherit">
-            {cursorText}
-          </span>
+          <div className="flex h-full w-full items-center justify-center">
+            <span className="pointer-events-none text-inherit">
+              {cursorText}
+            </span>
+          </div>
         )}
       </motion.div>
 
