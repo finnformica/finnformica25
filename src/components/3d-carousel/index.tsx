@@ -3,10 +3,12 @@ import { Canvas } from "@react-three/fiber";
 
 import _ from "lodash";
 
+import { useCustomCursor } from "@/context/custom-cursor-context";
+import { getRootStyle } from "@/lib/utils";
+
+import "./bent-plane-geometry";
 import { Card, CardProps } from "./card-item";
 import { Text } from "./text";
-import "./bent-plane-geometry";
-import { getRootStyle } from "@/lib/utils";
 
 type CarouselProps = {
   cards: CardProps[];
@@ -40,8 +42,10 @@ type ModelProps = {
 };
 
 const Model = ({ active, setActive, cards }: ModelProps) => {
+  const { setCursorText, setCursorVariant } = useCustomCursor();
+
   const Y_OFFSET = 0.25;
-  const foregroundColor = getRootStyle("--foreground");
+  const foregroundColor = getRootStyle("--foreground", document);
 
   const handleClick = _.throttle(
     (index: number) => {
@@ -56,8 +60,22 @@ const Model = ({ active, setActive, cards }: ModelProps) => {
     { trailing: false }, // Prevents the function from being called more than once every 500ms
   );
 
+  const onPointerOver = () => {
+    setCursorText("drag");
+    setCursorVariant("rotate");
+  };
+
+  const onPointerOut = () => {
+    setCursorText("");
+    setCursorVariant("default");
+  };
+
   return (
-    <Canvas camera={{ position: [0, 0, 4] }}>
+    <Canvas
+      camera={{ position: [0, 0, 4] }}
+      onPointerOver={onPointerOver}
+      onPointerOut={onPointerOut}
+    >
       <OrbitControls
         makeDefault
         enableZoom={false}

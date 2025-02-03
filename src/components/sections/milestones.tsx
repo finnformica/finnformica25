@@ -12,10 +12,10 @@ import {
 } from "@/components/ui/accordion";
 import { Separator } from "../ui/separator";
 
-const Milestones = () => {
-  const MotionSeparator = motion.create(Separator);
-  const MotionAccordionTrigger = motion.create(AccordionTrigger);
+const MotionSeparator = motion.create(Separator);
+const MotionAccordionTrigger = motion.create(AccordionTrigger);
 
+const Milestones = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.5 });
 

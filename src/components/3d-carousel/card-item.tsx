@@ -1,9 +1,14 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 
 import { Image, ImageProps } from "@react-three/drei";
 import { ThreeEvent, useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import * as THREE from "three";
+
+import { useCustomCursor } from "@/context/custom-cursor-context";
+
 import { Text } from "./text";
 
 export type CardProps = {
@@ -21,15 +26,25 @@ export function Card({
   onClick,
   ...props
 }: ImageProps & { card: CardProps; onClick?: () => void }) {
+  const { setCursorText, setCursorVariant } = useCustomCursor();
+
   const ref = useRef<THREE.Mesh>(null);
   const [hovered, hover] = useState(false);
 
   const { image } = card;
 
-  const onPointerOver = (e: ThreeEvent<PointerEvent>) => (
-    e.stopPropagation(), hover(true)
-  );
-  const onPointerOut = () => hover(false);
+  const onPointerOver = (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    hover(true);
+    setCursorText("view");
+    setCursorVariant("project");
+  };
+
+  const onPointerOut = () => {
+    hover(false);
+    setCursorText("drag");
+    setCursorVariant("rotate");
+  };
 
   useFrame((state, delta) => {
     easing.damp3(ref.current!.scale, hovered ? 1.15 : 1, 0.1, delta);
@@ -44,7 +59,7 @@ export function Card({
   });
 
   useEffect(() => {
-    document.body.style.cursor = hovered ? "pointer" : "auto";
+    document.body.style.cursor = hovered ? "none" : "auto";
   }, [hovered]);
 
   return (
