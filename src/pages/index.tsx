@@ -25,7 +25,8 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+      document.body.style.cursor = "default";
+    }, 5000);
   }, []);
 
   return (

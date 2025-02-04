@@ -38,12 +38,16 @@ export function Card({
     hover(true);
     setCursorText("view");
     setCursorVariant("project");
+
+    document.body.style.cursor = "none";
   };
 
   const onPointerOut = () => {
     hover(false);
     setCursorText("drag");
     setCursorVariant("rotate");
+
+    document.body.style.cursor = "auto";
   };
 
   useFrame((state, delta) => {
@@ -57,10 +61,6 @@ export function Card({
     );
     easing.damp(ref.current!.material, "zoom", hovered ? 0.7 : 0.9, 0.2, delta);
   });
-
-  useEffect(() => {
-    document.body.style.cursor = hovered ? "none" : "auto";
-  }, [hovered]);
 
   return (
     // @ts-ignore
