@@ -6,6 +6,7 @@ import useMousePosition from "@react-hook/mouse-position";
 import { motion } from "motion/react";
 
 import { getRootStyle } from "@/lib/utils";
+import { useIsScreenSm } from "@/hooks/useMediaQuery";
 
 export type CursorVariant = "default" | "project" | "rotate" | "hidden";
 
@@ -34,6 +35,7 @@ const CustomCursorProvider = ({
   children: React.ReactNode;
   containerRef: any;
 }) => {
+  const isScreenSm = useIsScreenSm();
   const [textFill, setTextFill] = useState<string | undefined>();
   const [cursorText, setCursorText] = useState("");
   const [cursorVariant, setCursorVariant] = useState<CursorVariant>("default");
@@ -104,44 +106,46 @@ const CustomCursorProvider = ({
 
   return (
     <CustomCursor.Provider value={value}>
-      <motion.div
-        variants={variants}
-        className="pointer-events-none fixed left-0 top-0 z-[100] h-[10px] w-[10px] rounded-full"
-        animate={cursorVariant}
-      >
-        {cursorVariant === "rotate" ? (
-          <svg
-            width="100"
-            height="100"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="animate-spin-slow"
-          >
-            <path
-              id="curve"
-              d="M 100,100 m75,0 a75,75 0 1,0 -150,0 a 75,75 0 1,0  150,0"
-              className="scale-50"
-            />
-            <text fill={textFill} fontSize="12px">
-              {[...Array(3)].map((_, i) => (
-                <textPath
-                  key={i}
-                  xlinkHref="#curve"
-                  startOffset={`${(i * 100) / 3}%`}
-                >
-                  {cursorText}
-                </textPath>
-              ))}
-            </text>
-          </svg>
-        ) : (
-          <div className="flex h-full w-full items-center justify-center">
-            <span className="pointer-events-none text-inherit">
-              {cursorText}
-            </span>
-          </div>
-        )}
-      </motion.div>
+      {isScreenSm && (
+        <motion.div
+          variants={variants}
+          className="pointer-events-none fixed left-0 top-0 z-[100] h-[10px] w-[10px] rounded-full"
+          animate={cursorVariant}
+        >
+          {cursorVariant === "rotate" ? (
+            <svg
+              width="100"
+              height="100"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="animate-spin-slow"
+            >
+              <path
+                id="curve"
+                d="M 100,100 m75,0 a75,75 0 1,0 -150,0 a 75,75 0 1,0  150,0"
+                className="scale-50"
+              />
+              <text fill={textFill} fontSize="12px">
+                {[...Array(3)].map((_, i) => (
+                  <textPath
+                    key={i}
+                    xlinkHref="#curve"
+                    startOffset={`${(i * 100) / 3}%`}
+                  >
+                    {cursorText}
+                  </textPath>
+                ))}
+              </text>
+            </svg>
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <span className="pointer-events-none text-inherit">
+                {cursorText}
+              </span>
+            </div>
+          )}
+        </motion.div>
+      )}
 
       {children}
     </CustomCursor.Provider>
