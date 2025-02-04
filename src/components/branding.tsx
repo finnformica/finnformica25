@@ -15,6 +15,9 @@ export const Avatar = ({
   <motion.div
     initial={{ scale: 0 }}
     animate={{ scale: 1 }}
+    transition={{
+      delay: 0.5,
+    }}
     className={cn("relative rounded-full", className)}
   >
     <Image
@@ -23,6 +26,7 @@ export const Avatar = ({
       fill
       sizes="160px"
       style={{ objectFit: "cover", borderRadius: rounded ? "50%" : "0%" }}
+      priority
     />
   </motion.div>
 );

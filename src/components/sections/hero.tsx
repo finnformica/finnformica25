@@ -86,7 +86,7 @@ const Hero = () => {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{
                     duration: 1,
-                    delay: i * 0.25,
+                    delay: i * 0.25 + 0.5,
                     ease: "easeInOut",
                   }}
                   className="flex flex-row gap-2 text-xs font-bold md:text-base"
