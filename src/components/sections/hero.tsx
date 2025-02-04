@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, useInView, Variants } from "motion/react";
 
 import { Avatar, Banner } from "@/components/branding";
 import Header from "@/components/header";
@@ -7,10 +7,25 @@ import { HackerText, StaggeredText } from "@/components/text";
 import { Button } from "@/components/ui/button";
 import { useCustomCursor } from "@/context/custom-cursor-context";
 import { scrollToSection } from "@/lib/utils";
+import { useRef } from "react";
 
 const MotionButton = motion.create(Button);
 
+const buttonVariants = {
+  initial: { width: 0, opacity: 0 },
+  animate: { width: "100%", opacity: 1 },
+  exit: {},
+};
+
+const tagVariants = {
+  initial: { y: 25, opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  exit: {},
+};
+
 const Hero = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 1 });
   const { setCursorText, setCursorVariant } = useCustomCursor();
 
   const tags = [
@@ -29,11 +44,19 @@ const Hero = () => {
     setCursorVariant("default");
   };
 
+  const anim = (variants: Variants) => ({
+    initial: "initial",
+    animate: isInView ? "animate" : "initial",
+    exit: "exit",
+    variants,
+  });
+
   return (
     <>
       <VerticalLines />
 
       <div
+        ref={ref}
         className="hero z-[1px] flex grow flex-col"
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
@@ -63,8 +86,7 @@ const Hero = () => {
 
             {/* CTA */}
             <MotionButton
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: "100%", opacity: 1 }}
+              {...anim(buttonVariants)}
               variant="outline"
               className="mx-auto w-full"
               onClick={() => scrollToSection("#projects")}
@@ -82,8 +104,7 @@ const Hero = () => {
               {tags.map((tag, i) => (
                 <motion.div
                   key={i}
-                  initial={{ y: 25, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
+                  {...anim(tagVariants)}
                   transition={{
                     duration: 1,
                     delay: i * 0.25,
