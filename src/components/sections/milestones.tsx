@@ -13,7 +13,7 @@ import {
 import { Separator } from "../ui/separator";
 
 const MotionSeparator = motion.create(Separator);
-const MotionAccordionTrigger = motion.create(AccordionTrigger);
+// const MotionAccordionTrigger = motion.create(AccordionTrigger);
 
 const Milestones = () => {
   const ref = useRef(null);
@@ -67,22 +67,20 @@ const Milestones = () => {
         >
           {content.map((item, i) => (
             <AccordionItem key={i} value={i.toString()} className="border-b-0">
-              <AnimatePresence>
-                <MotionAccordionTrigger
-                  className="flex flex-col items-start text-2xl hover:no-underline"
-                  initial="initial"
-                  animate={
-                    expanded === i.toString() && isInView
-                      ? "animate"
-                      : "initial"
-                  }
-                  whileHover={expanded === i.toString() ? "animate" : "hover"}
-                  exit="exit"
-                >
-                  {item.year}
+              <AccordionTrigger className="flex flex-col items-start text-2xl hover:no-underline">
+                {item.year}
+                <AnimatePresence>
                   <MotionSeparator
                     className="w-20 bg-[var(--foreground)]"
                     key={i}
+                    initial="initial"
+                    animate={
+                      expanded === i.toString() && isInView
+                        ? "animate"
+                        : "initial"
+                    }
+                    whileHover={expanded === i.toString() ? "animate" : "hover"}
+                    exit="exit"
                     variants={{
                       initial: { width: "80px" },
                       animate: { width: "100%" },
@@ -91,8 +89,8 @@ const Milestones = () => {
                     }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                   />
-                </MotionAccordionTrigger>
-              </AnimatePresence>
+                </AnimatePresence>
+              </AccordionTrigger>
               <AccordionContent
                 key={i}
                 className="float-right text-right md:max-w-[80%] md:text-lg"
