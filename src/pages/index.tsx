@@ -32,19 +32,18 @@ export default function Home() {
   return (
     <>
       {isLoading && <Preloader />}
-      {!isLoading && (
-        <div className="h-screen w-screen snap-y snap-mandatory snap-always overflow-y-auto overflow-x-hidden">
-          {sections.map((comp, i) => (
-            <section
-              key={i}
-              className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-4 border-[var(--foreground)] bg-[var(--background)] sm:border-8"
-              id={comp.key ?? ""}
-            >
-              {comp}
-            </section>
-          ))}
-        </div>
-      )}
+
+      <div className="h-screen w-screen snap-y snap-mandatory snap-always overflow-y-auto overflow-x-hidden">
+        {sections.map((comp, i) => (
+          <section
+            key={i}
+            className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-4 border-[var(--foreground)] bg-[var(--background)] sm:border-8"
+            id={comp.key ?? ""}
+          >
+            {comp}
+          </section>
+        ))}
+      </div>
     </>
   );
 }

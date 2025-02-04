@@ -13,10 +13,11 @@ export const Avatar = ({
   rounded: boolean;
 }) => (
   <motion.div
-    initial={{ scale: 0 }}
-    animate={{ scale: 1 }}
-    transition={{
-      delay: 0.5,
+    initial="initial"
+    whileInView="animate"
+    variants={{
+      initial: { scale: 0 },
+      animate: { scale: 1 },
     }}
     className={cn("relative rounded-full", className)}
   >
