@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="robots" content="all" />
       </Head>
 
-      <main className={supplyMono.className} ref={ref}>
+      <main className={`${supplyMono.className} relative`} ref={ref}>
         <CustomCursorProvider containerRef={ref}>
           <Component {...pageProps} />
         </CustomCursorProvider>

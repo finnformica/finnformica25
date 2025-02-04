@@ -1,12 +1,40 @@
-import styles from "@/styles/preloader.module.css";
+import { useEffect, useState } from "react";
+import PixelTransition from "../pixel-transition";
+import LoadingGlitch from "../loading-glitch";
 
 const Preloader = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isPixelActive, setIsPixelActive] = useState(false);
+  const [isGlitchActive, setIsGlitchActive] = useState(isLoading);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+  }, []);
+
+  useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        setIsGlitchActive(false);
+      }, 2500);
+
+      setTimeout(() => {
+        setIsPixelActive(true);
+        document.body.style.cursor = "default";
+      }, 2000);
+
+      setTimeout(() => {
+        setIsPixelActive(false);
+      }, 3000);
+    }
+  }, [isLoading]);
+
   return (
-    <div className="absolute left-0 top-0 z-[999] flex h-screen w-screen items-center justify-center bg-black text-white">
-      <p className={styles.glitch} data-text="Loading...">
-        Loading...
-      </p>
-    </div>
+    <>
+      <LoadingGlitch isActive={isGlitchActive} />
+      <PixelTransition isLoading={isLoading} isActive={isPixelActive} />
+    </>
   );
 };
 
