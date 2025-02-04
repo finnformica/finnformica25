@@ -17,7 +17,7 @@ type TextProps = Text3DProps & {
 };
 
 export const Text = ({ children, font, ...props }: TextProps) => {
-  const foregroundColor = getRootStyle("--foreground");
+  const foregroundColor = getRootStyle("--foreground", document);
 
   return (
     <Text3D

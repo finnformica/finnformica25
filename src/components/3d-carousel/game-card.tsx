@@ -1,5 +1,7 @@
+import { DialogClose } from "@radix-ui/react-dialog";
 import { ArrowLeft, ArrowRight, X } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,8 +14,6 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 import { CardProps } from "./card-item";
-import { DialogClose } from "@radix-ui/react-dialog";
-import { Button } from "../ui/button";
 
 const ChipLink = ({
   href,

@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "compounds": [{"name": "finnformica25 + chrome", "configurations": ["finnformica25", "chrome"]}],
+    "configurations": [
+        {
+            "name": "finnformica25",
+            "type":  "node-terminal",
+            "request": "launch",
+            "command": "npm run dev --inspect"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/.vscode/chrome",
+            "skipFiles": ["<node_internals>/**", "node_modules/**"]
+        }
+    ]
+}

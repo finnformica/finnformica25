@@ -1,10 +1,13 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useRef } from "react";
 
+import CustomCursorProvider from "@/context/custom-cursor-context";
 import { supplyMono } from "@/fonts";
 import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const ref = useRef<HTMLDivElement>(null);
   return (
     <>
       <Head>
@@ -28,8 +31,11 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta name="robots" content="all" />
       </Head>
-      <main className={supplyMono.className}>
-        <Component {...pageProps} />
+
+      <main className={supplyMono.className} ref={ref}>
+        <CustomCursorProvider containerRef={ref}>
+          <Component {...pageProps} />
+        </CustomCursorProvider>
       </main>
     </>
   );

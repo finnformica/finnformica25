@@ -5,21 +5,39 @@ import Header from "@/components/header";
 import { VerticalLines } from "@/components/lines";
 import { HackerText, StaggeredText } from "@/components/text";
 import { Button } from "@/components/ui/button";
+import { useCustomCursor } from "@/context/custom-cursor-context";
 import { scrollToSection } from "@/lib/utils";
 
+const MotionButton = motion.create(Button);
+
 const Hero = () => {
-  const MotionButton = motion.create(Button);
+  const { setCursorText, setCursorVariant } = useCustomCursor();
+
   const tags = [
     { name: "Design", tag: "DS" },
     { name: "Develop", tag: "DV" },
     { name: "Deploy", tag: "DE" },
   ];
 
+  const onMouseEnter = () => {
+    setCursorText("scroll");
+    setCursorVariant("rotate");
+  };
+
+  const onMouseLeave = () => {
+    setCursorText("");
+    setCursorVariant("default");
+  };
+
   return (
     <>
       <VerticalLines />
 
-      <div className="hero z-[1px] flex grow flex-col">
+      <div
+        className="hero z-[1px] flex grow flex-col"
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
         <Header />
 
         {/* Content container */}
