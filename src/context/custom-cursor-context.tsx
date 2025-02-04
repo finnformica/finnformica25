@@ -18,7 +18,14 @@ export type CursorContextType = {
   mouseYPosition: number;
 };
 
-export const CustomCursor = createContext<CursorContextType | null>(null);
+export const CustomCursor = createContext<CursorContextType>({
+  cursorText: "",
+  setCursorText: () => {},
+  cursorVariant: "default",
+  setCursorVariant: () => {},
+  mouseXPosition: 0,
+  mouseYPosition: 0,
+});
 
 const CustomCursorProvider = ({
   children,
@@ -115,16 +122,12 @@ const CustomCursorProvider = ({
               d="M 100,100 m75,0 a75,75 0 1,0 -150,0 a 75,75 0 1,0  150,0"
               className="scale-50"
             />
-            <text
-              fill={textFill}
-              fontSize="12px"
-              style={{ letterSpacing: "0.1em" }}
-            >
+            <text fill={textFill} fontSize="12px">
               {[...Array(3)].map((_, i) => (
                 <textPath
+                  key={i}
                   xlinkHref="#curve"
                   startOffset={`${(i * 100) / 3}%`}
-                  letter-spacing="2"
                 >
                   {cursorText}
                 </textPath>
@@ -147,9 +150,6 @@ const CustomCursorProvider = ({
 
 export const useCustomCursor = () => {
   const context = useContext(CustomCursor);
-  if (context === undefined) {
-    throw new Error("useCustomCursor was used outside of CustomCursorProvider");
-  }
 
   return context as CursorContextType;
 };

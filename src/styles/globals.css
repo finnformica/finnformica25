@@ -3,12 +3,16 @@
 @tailwind utilities;
 
 :root {
+  /* Colours */
   --background: #ffffff;
   --foreground: #171717;
-
   --primary: #82addc;
-
   --divider: rgba(139, 139, 139, 0.1);
+
+  /* Preloader variables */
+  --preloader-f-size: 6;
+  --preloader-f-unit: 1vmin;
+  --preloader-f: calc(var(--preloader-f-size) * var(--preloader-f-unit));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -55,6 +59,7 @@ body {
   background: var(--foreground);
   font-family: var(--font-supply-mono), sans-serif;
   scroll-behavior: smooth;
+  cursor: wait; /* initial state of cursor while preloader displays */
 }
 
 body {
