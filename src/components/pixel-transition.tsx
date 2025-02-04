@@ -55,22 +55,14 @@ const getBlocks = (isActive: boolean, indexOfColum: number) => {
   });
 };
 
-const PixelTransition = ({ isLoading }: { isLoading: boolean }) => {
+const PixelTransition = ({
+  isLoading,
+  isActive,
+}: {
+  isLoading: boolean;
+  isActive: boolean;
+}) => {
   const [isClient, setIsClient] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
-    if (isLoading) {
-      setTimeout(() => {
-        setIsActive(true);
-        document.body.style.cursor = "default";
-      }, 2000);
-
-      setTimeout(() => {
-        setIsActive(false);
-      }, 3000);
-    }
-  }, [isLoading]);
 
   useEffect(() => {
     setIsClient(true);
