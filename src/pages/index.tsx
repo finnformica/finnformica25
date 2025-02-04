@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AnimatePresence } from "motion/react";
 
 import Footer from "@/components/sections/footer";
 import Hero from "@/components/sections/hero";
@@ -10,7 +11,6 @@ import Preloader from "@/components/sections/preloader";
 import Projects from "@/components/sections/projects";
 import Tech from "@/components/sections/tech";
 import PixelTransition from "@/components/pixel-transition";
-import { AnimatePresence } from "motion/react";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,16 +27,13 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-      document.body.style.cursor = "default";
     }, 5000);
   }, []);
 
   return (
     <>
-      <AnimatePresence>
-        {isLoading && <Preloader />}
-        {isLoading && <PixelTransition isLoading={isLoading} />}
-      </AnimatePresence>
+      <Preloader isLoading={isLoading} />
+      <PixelTransition isLoading={isLoading} />
 
       <div className="h-screen w-screen snap-y snap-mandatory snap-always overflow-y-auto overflow-x-hidden">
         {sections.map((comp, i) => (

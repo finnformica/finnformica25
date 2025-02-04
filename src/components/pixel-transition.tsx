@@ -8,9 +8,7 @@ import { useEffect, useState } from "react";
 const GRID_SIZE = 10;
 
 const anim = {
-  initial: {
-    opacity: 0,
-  },
+  initial: { opacity: 0 },
   open: (delay: number[]) => ({
     opacity: 1,
     transition: { duration: 0, delay: 0.02 * delay[1] },
@@ -65,6 +63,7 @@ const PixelTransition = ({ isLoading }: { isLoading: boolean }) => {
     if (isLoading) {
       setTimeout(() => {
         setIsActive(true);
+        document.body.style.cursor = "default";
       }, 2000);
 
       setTimeout(() => {
@@ -78,16 +77,22 @@ const PixelTransition = ({ isLoading }: { isLoading: boolean }) => {
   }, []);
 
   return (
-    <div className={styles.pixelBackground}>
-      {isClient &&
-        [...Array(GRID_SIZE)].map((_, index) => {
-          return (
-            <div key={index} className={styles.row}>
-              <AnimatePresence>{getBlocks(isActive, index)}</AnimatePresence>
-            </div>
-          );
-        })}
-    </div>
+    <AnimatePresence>
+      {(isActive || isLoading) && (
+        <div className={styles.pixelBackground}>
+          {isClient &&
+            [...Array(GRID_SIZE)].map((_, index) => {
+              return (
+                <div key={index} className={styles.row}>
+                  <AnimatePresence>
+                    {getBlocks(isActive, index)}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+        </div>
+      )}
+    </AnimatePresence>
   );
 };
 
