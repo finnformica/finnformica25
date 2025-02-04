@@ -14,6 +14,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 import { CardProps } from "./card-item";
+import { useCustomCursor } from "@/context/custom-cursor-context";
 
 const ChipLink = ({
   href,
@@ -51,6 +52,8 @@ const GameCard = ({
   handleNext,
   handlePrev,
 }: GameCardProps) => {
+  const { setCursorText, setCursorVariant } = useCustomCursor();
+
   const isScreenXs = useMediaQuery("(min-width: 470px)");
 
   const bgGradientColors =
@@ -67,6 +70,16 @@ const GameCard = ({
   const footerClipPath =
     "[clip-path:polygon(0_0,_0_100%,_100%_100%,_100%_25px,_30%_25px,_21%_0)]";
 
+  const onMouseEnter = () => {
+    setCursorText("");
+    setCursorVariant("default");
+  };
+
+  const onMouseLeave = () => {
+    setCursorText("drag");
+    setCursorVariant("rotate");
+  };
+
   if (!project) return null;
 
   return (
@@ -74,101 +87,103 @@ const GameCard = ({
       open={active !== undefined}
       onOpenChange={() => setActive(undefined)}
     >
-      <DialogContent
-        className={`${supplyMono.className} min-h-[600px] w-[80%] p-0 sm:w-96`}
-        aria-describedby={project.description}
-      >
-        {/* Wrapper for content positioning */}
-        <div className="relative">
-          {/* Content container and border */}
-          <div className="absolute left-[50%] top-[50%] z-[100] flex h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col gap-3 rounded border border-[var(--foreground)] bg-[var(--background)] p-6 shadow-lg">
-            {/* Title / Header */}
-            <DialogHeader
-              className={`rounded-t px-2 py-1 text-left ${bgGradientBr} ${headerClipPath}`}
-            >
-              <DialogTitle className="tracking-wider md:text-2xl">
-                {project.title}
-              </DialogTitle>
-              <DialogTitle className="pb-0.5 text-xs font-light text-muted-foreground md:text-sm">
-                {project.subtitle}
-              </DialogTitle>
-            </DialogHeader>
+      <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <DialogContent
+          className={`${supplyMono.className} min-h-[600px] w-[80%] p-0 sm:w-96`}
+          aria-describedby={project.description}
+        >
+          {/* Wrapper for content positioning */}
+          <div className="relative">
+            {/* Content container and border */}
+            <div className="absolute left-[50%] top-[50%] z-[100] flex h-full w-full translate-x-[-50%] translate-y-[-50%] flex-col gap-3 rounded border border-[var(--foreground)] bg-[var(--background)] p-6 shadow-lg">
+              {/* Title / Header */}
+              <DialogHeader
+                className={`rounded-t px-2 py-1 text-left ${bgGradientBr} ${headerClipPath}`}
+              >
+                <DialogTitle className="tracking-wider md:text-2xl">
+                  {project.title}
+                </DialogTitle>
+                <DialogTitle className="pb-0.5 text-xs font-light text-muted-foreground md:text-sm">
+                  {project.subtitle}
+                </DialogTitle>
+              </DialogHeader>
 
-            {/* Image */}
-            <div
-              className={`h-52 w-full bg-cover bg-center ${imgClipPath} mt-[-32px]`}
-              style={{
-                backgroundImage: `url('${project.image}')`, // Tailwind throws an error if this is not in style
-              }}
-            />
+              {/* Image */}
+              <div
+                className={`h-52 w-full bg-cover bg-center ${imgClipPath} mt-[-32px]`}
+                style={{
+                  backgroundImage: `url('${project.image}')`, // Tailwind throws an error if this is not in style
+                }}
+              />
 
-            {/* Description */}
-            <div className="mt-[-34px] grow bg-[var(--background)]">
-              <p className="pb-3 text-right text-sm sm:text-lg">
-                {isScreenXs ? "Description" : "Desc"}
-              </p>
-              <DialogDescription className="text-xs md:text-base">
-                {project.description}
-              </DialogDescription>
-            </div>
-            {/* Stack / Footer */}
-            <div
-              className={`flex flex-col gap-3 rounded-b px-3 py-1 ${footerClipPath} ${bgGradientTr}`}
-            >
-              <p className="pb-2 text-sm sm:text-lg">Stack</p>
-              <div className="flex justify-between">
-                {project.stack.map((item) => (
-                  <p
-                    key={item}
-                    className="text-sm text-muted-foreground md:text-base"
-                  >
-                    {item}
-                  </p>
-                ))}
+              {/* Description */}
+              <div className="mt-[-34px] grow bg-[var(--background)]">
+                <p className="pb-3 text-right text-sm sm:text-lg">
+                  {isScreenXs ? "Description" : "Desc"}
+                </p>
+                <DialogDescription className="text-xs md:text-base">
+                  {project.description}
+                </DialogDescription>
               </div>
+              {/* Stack / Footer */}
+              <div
+                className={`flex flex-col gap-3 rounded-b px-3 py-1 ${footerClipPath} ${bgGradientTr}`}
+              >
+                <p className="pb-2 text-sm sm:text-lg">Stack</p>
+                <div className="flex justify-between">
+                  {project.stack.map((item) => (
+                    <p
+                      key={item}
+                      className="text-sm text-muted-foreground md:text-base"
+                    >
+                      {item}
+                    </p>
+                  ))}
+                </div>
 
-              <div className="mb-2 flex justify-evenly">
-                {project.github !== undefined && (
-                  <ChipLink href={project.github}>GitHub</ChipLink>
-                )}
+                <div className="mb-2 flex justify-evenly">
+                  {project.github !== undefined && (
+                    <ChipLink href={project.github}>GitHub</ChipLink>
+                  )}
 
-                {project.source !== undefined && (
-                  <ChipLink href={project.source}>Source</ChipLink>
-                )}
+                  {project.source !== undefined && (
+                    <ChipLink href={project.source}>Source</ChipLink>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
 
-          <DialogClose className="not-focus-visible absolute bottom-0 left-[50%] z-[100] translate-x-[-50%] translate-y-[50%]">
+            <DialogClose className="not-focus-visible absolute bottom-0 left-[50%] z-[100] translate-x-[-50%] translate-y-[50%]">
+              <Button
+                variant="outline"
+                size="icon"
+                className="bg-[var(--background)]"
+              >
+                <X className="h-4 w-4" />
+                <span className="sr-only">Close</span>
+              </Button>
+            </DialogClose>
+
             <Button
               variant="outline"
               size="icon"
-              className="bg-[var(--background)]"
+              onClick={handlePrev}
+              className="absolute left-0 top-[50%] z-[100] translate-x-[-50%] translate-y-[-50%] bg-[var(--background)] sm:translate-x-[-150%]"
             >
-              <X className="h-4 w-4" />
-              <span className="sr-only">Close</span>
+              <ArrowLeft />
             </Button>
-          </DialogClose>
 
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handlePrev}
-            className="absolute left-0 top-[50%] z-[100] translate-x-[-50%] translate-y-[-50%] bg-[var(--background)] sm:translate-x-[-150%]"
-          >
-            <ArrowLeft />
-          </Button>
-
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handleNext}
-            className="absolute right-0 top-[50%] z-[100] translate-x-[50%] translate-y-[-50%] bg-[var(--background)] sm:translate-x-[150%]"
-          >
-            <ArrowRight />
-          </Button>
-        </div>
-      </DialogContent>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={handleNext}
+              className="absolute right-0 top-[50%] z-[100] translate-x-[50%] translate-y-[-50%] bg-[var(--background)] sm:translate-x-[150%]"
+            >
+              <ArrowRight />
+            </Button>
+          </div>
+        </DialogContent>
+      </div>
     </Dialog>
   );
 };
