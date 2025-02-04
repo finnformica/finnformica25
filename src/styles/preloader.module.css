@@ -1,13 +1,41 @@
 @import url(https://fonts.googleapis.com/css?family=Press+Start+2P);
 
+.pixelBackground {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  z-index: 9999;
+  pointer-events: none;
+  background-color: transparent;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  height: 10vh;
+}
+
+.block {
+  width: 10vh;
+  height: 100%;
+  background-color: var(--foreground);
+}
+
 .glitch {
   font-family: "Press Start 2P";
   font-size: var(--preloader-f);
 
+  z-index: 999;
   flex: 1;
   line-height: 0.75;
   margin: auto;
-  color: white;
+  color: var(--foreground);
   text-align: center;
   transform: scaleX(var(--scale, 1));
   animation: glitch-p 11s infinite alternate;
