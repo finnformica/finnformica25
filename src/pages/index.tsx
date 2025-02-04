@@ -26,23 +26,25 @@ export default function Home() {
     setTimeout(() => {
       setIsLoading(false);
       document.body.style.cursor = "default";
-    }, 5000);
+    }, 3000);
   }, []);
 
   return (
     <>
       {isLoading && <Preloader />}
-      <div className="h-screen w-screen snap-y snap-mandatory snap-always overflow-y-auto overflow-x-hidden">
-        {sections.map((comp, i) => (
-          <section
-            key={i}
-            className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-4 border-[var(--foreground)] bg-[var(--background)] sm:border-8"
-            id={comp.key ?? ""}
-          >
-            {comp}
-          </section>
-        ))}
-      </div>
+      {!isLoading && (
+        <div className="h-screen w-screen snap-y snap-mandatory snap-always overflow-y-auto overflow-x-hidden">
+          {sections.map((comp, i) => (
+            <section
+              key={i}
+              className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-4 border-[var(--foreground)] bg-[var(--background)] sm:border-8"
+              id={comp.key ?? ""}
+            >
+              {comp}
+            </section>
+          ))}
+        </div>
+      )}
     </>
   );
 }
