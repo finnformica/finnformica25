@@ -36,7 +36,7 @@
   margin: auto;
   color: var(--foreground);
   text-align: center;
-  transform: scaleX(var(--scale, 1));
+  transform: scaleX(var(--scale, 1)) translateX(2%);
   animation: glitch-p 11s infinite alternate;
 }
 
