@@ -80,7 +80,7 @@ const Model = ({ active, setActive, cards }: ModelProps) => {
         makeDefault
         enableZoom={false}
         autoRotate
-        autoRotateSpeed={0.75}
+        autoRotateSpeed={0.3}
         enableDamping
         minPolarAngle={Math.PI / 2}
         maxPolarAngle={Math.PI / 2}
