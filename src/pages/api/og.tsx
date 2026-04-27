@@ -10,14 +10,26 @@ const MUTED = "#7a7d85";
 export default async function handler(req: NextRequest) {
   const { origin } = new URL(req.url);
 
-  const [outerSansBlack, supplyMono] = await Promise.all([
+  const [outerSansBlack, supplyMono, logoBuffer] = await Promise.all([
     fetch(new URL("/fonts/OuterSansAlt-Black.otf", origin)).then((r) =>
       r.arrayBuffer(),
     ),
     fetch(new URL("/fonts/PPSupplyMono-Regular.otf", origin)).then((r) =>
       r.arrayBuffer(),
     ),
+    fetch(new URL("/images/finnformica-logo.png", origin)).then((r) =>
+      r.arrayBuffer(),
+    ),
   ]);
+
+  // Satori needs an embeddable URL for <img>. Convert to a data URL using
+  // Web-standard btoa() so this stays portable across edge / node runtimes.
+  const bytes = new Uint8Array(logoBuffer);
+  let binary = "";
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  const logoDataUrl = `data:image/png;base64,${btoa(binary)}`;
 
   return new ImageResponse(
     (
@@ -74,28 +86,28 @@ export default async function handler(req: NextRequest) {
           </div>
         ))}
 
-        {/* Top meta row */}
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            fontSize: 18,
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: MUTED,
+            justifyContent: "flex-end",
           }}
         >
-          <span>[ ff / portfolio ]</span>
-          <span>[ 2025 ]</span>
+          <img
+            src={logoDataUrl}
+            alt="ff"
+            width={88}
+            height={88}
+            style={{ borderRadius: "50%" }}
+          />
         </div>
 
-        {/* Wordmark + subtitle, centered vertically */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             flexGrow: 1,
             justifyContent: "center",
+            alignItems: "flex-start",
           }}
         >
           <div
@@ -129,44 +141,27 @@ export default async function handler(req: NextRequest) {
           <div
             style={{
               display: "flex",
-              alignItems: "center",
+              fontSize: 24,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: FG,
               marginTop: 36,
-              gap: 20,
             }}
           >
-            <div
-              style={{
-                width: 64,
-                height: 1,
-                backgroundColor: FG,
-                opacity: 0.4,
-              }}
-            />
-            <span
-              style={{
-                fontSize: 24,
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: FG,
-              }}
-            >
-              designer · developer
-            </span>
+            designer · developer
           </div>
         </div>
 
-        {/* Bottom meta row */}
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
             fontSize: 18,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             color: MUTED,
           }}
         >
-          <span>finnformica.com</span>
           <span>[ design / develop / deploy ]</span>
         </div>
       </div>
