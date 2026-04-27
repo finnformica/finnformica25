@@ -23,13 +23,27 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="keywords"
-          content="personal portfolio, nextjs, web development"
+          content="finn formica, portfolio, full-stack developer, designer, next.js, react"
         />
         <meta
           name="description"
-          content="Hi, I am a full-stack developer and designer. I love creating beautiful and functional websites."
+          content="Portfolio of Finn Formica — designing and building intuitive, scalable web applications."
         />
         <meta name="robots" content="all" />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Finn Formica — Designer & Developer"
+        />
+        <meta
+          property="og:description"
+          content="Portfolio of Finn Formica — designing and building intuitive, scalable web applications."
+        />
+        <meta property="og:image" content="/api/og" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </Head>
 
       <main className={`${supplyMono.className} relative`} ref={ref}>

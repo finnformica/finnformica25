@@ -82,7 +82,7 @@ const Info = () => {
 
   useAnimationFrame(() => {
     // track the position of the mouse relative to the ref
-    if (!ref.current || !isInView) return;
+    if (!ref.current) return;
 
     const constrain = 50;
     const {

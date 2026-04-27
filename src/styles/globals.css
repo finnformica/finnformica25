@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  /* Colours */
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Neutrals are tinted toward the brand blue so nothing reads as pure #fff/#000. */
+  --background: #fcfcfd;
+  --foreground: #16171a;
   --primary: #82addc;
   --secondary: #2c4b84;
   --divider: rgba(139, 139, 139, 0.1);
@@ -19,8 +19,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0a0a0b;
+    --foreground: #ededee;
   }
 
   /* Only gradient text in dark mode */
@@ -73,8 +73,10 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    /* Mirror the tinted neutrals above so shadcn utilities (bg-background,
+       text-foreground) don't drift from raw var(--background) usages. */
+    --background: 240 20% 99%;
+    --foreground: 225 8% 9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
@@ -100,8 +102,8 @@ body {
     --radius: 0.5rem;
   }
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 240 6% 4%;
+    --foreground: 240 3% 93%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
