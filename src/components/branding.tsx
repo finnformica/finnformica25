@@ -16,9 +16,10 @@ export const Avatar = ({
     initial="initial"
     whileInView="animate"
     variants={{
-      initial: { scale: 0 },
-      animate: { scale: 1 },
+      initial: { scale: 0.92, opacity: 0 },
+      animate: { scale: 1, opacity: 1 },
     }}
+    transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
     className={cn("relative rounded-full", className)}
   >
     <Image

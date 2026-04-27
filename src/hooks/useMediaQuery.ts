@@ -28,3 +28,6 @@ export const useIsScreenSm = () => useMediaQuery("(min-width: 640px)");
 export const useIsScreenMd = () => useMediaQuery("(min-width: 768px)");
 export const useIsScreenLg = () => useMediaQuery("(min-width: 1024px)");
 export const useIsScreenXl = () => useMediaQuery("(min-width: 1280px)");
+
+export const useHasHover = () =>
+  useMediaQuery("(hover: hover) and (pointer: fine)");

@@ -3,6 +3,11 @@ import type { Config } from "tailwindcss";
 export default {
   darkMode: ["class"],
   content: ["./src/**/*.{ts,tsx}"],
+  future: {
+    // Scope every `hover:` utility behind `@media (hover: hover)` so taps
+    // on touch devices don't fire spurious sticky-hover states.
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
       animation: {

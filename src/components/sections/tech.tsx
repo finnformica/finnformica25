@@ -4,13 +4,14 @@ import { useRef, useState } from "react";
 import { SectionTitle } from "@/components/text";
 import { cn } from "@/lib/utils";
 import styles from "@/styles/tech.module.css";
-import { useIsScreenSm } from "@/hooks/useMediaQuery";
+import { useHasHover, useIsScreenSm } from "@/hooks/useMediaQuery";
 
 const Tech = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.5 });
   const [selected, setSelected] = useState<number | null>(0);
   const isScreenSmall = useIsScreenSm();
+  const hasHover = useHasHover();
 
   const content = [
     {
@@ -71,9 +72,8 @@ const Tech = () => {
                   mass: 0.1,
                   damping: 10,
                   stiffness: 100,
-                  ease: "easeInOut",
                 },
-                opacity: { ease: "linear" },
+                opacity: { duration: 0.2, ease: [0.23, 1, 0.32, 1] },
               }}
               initial="initial"
               animate={isInView ? "animate" : "initial"}
@@ -94,24 +94,23 @@ const Tech = () => {
         initial="initial"
         animate={isInView ? "animate" : "initial"}
         transition={{
-          staggerChildren: 0.15,
-          ease: "easeInOut",
+          staggerChildren: 0.06,
+          ease: [0.23, 1, 0.32, 1],
         }}
         className={`${styles["transform-anticlockwise"]} absolute left-[-80px] top-[220px] flex items-center gap-3 lg:left-[150px] lg:top-[320px]`}
       >
         {content.map((item, i) => (
           <motion.div
             key={i}
-            whileHover="hover"
+            whileHover={hasHover ? "hover" : undefined}
             variants={{
               initial: { y: 10 },
               animate: { y: 0 },
               hover: {
                 y: -10,
                 transition: {
-                  type: "linear",
                   duration: 0.3,
-                  ease: "easeInOut",
+                  ease: [0.23, 1, 0.32, 1],
                 },
               },
             }}
