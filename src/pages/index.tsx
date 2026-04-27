@@ -4,7 +4,6 @@ import Footer from "@/components/sections/footer";
 import Hero from "@/components/sections/hero";
 import Info from "@/components/sections/info";
 import Milestones from "@/components/sections/milestones";
-import Preloader from "@/components/sections/preloader";
 import Projects from "@/components/sections/projects";
 import Tech from "@/components/sections/tech";
 
@@ -19,20 +18,16 @@ export default function Home() {
   ];
 
   return (
-    <>
-      <Preloader />
-
-      <div className="h-screen w-screen snap-y snap-mandatory snap-always overflow-y-auto overflow-x-hidden">
-        {sections.map((comp, i) => (
-          <section
-            key={i}
-            className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-4 border-[var(--foreground)] bg-[var(--background)] sm:border-8"
-            id={comp.key ?? i.toString()}
-          >
-            {comp}
-          </section>
-        ))}
-      </div>
-    </>
+    <div className="h-screen w-screen snap-y snap-mandatory snap-always overflow-y-auto overflow-x-hidden">
+      {sections.map((comp, i) => (
+        <section
+          key={i}
+          className="relative flex h-screen w-screen snap-start flex-col rounded-xl border-4 border-[var(--foreground)] bg-[var(--background)] sm:border-8"
+          id={comp.key ?? i.toString()}
+        >
+          {comp}
+        </section>
+      ))}
+    </div>
   );
 }

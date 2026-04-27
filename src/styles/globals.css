@@ -14,7 +14,6 @@
   --preloader-f-size: 6;
   --preloader-f-unit: 1vmin;
   --preloader-f: calc(var(--preloader-f-size) * var(--preloader-f-unit));
-  --preloader-r: 150px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -61,7 +60,6 @@ body {
   background: var(--foreground);
   font-family: var(--font-supply-mono), sans-serif;
   scroll-behavior: smooth;
-  cursor: wait; /* initial state of cursor while preloader displays */
 }
 
 body {
@@ -151,6 +149,13 @@ body {
 }
 
 /* Globally used styles */
+
+/* Body class added by the Preloader while it's mounted so the underlying
+   snap container can't scroll behind the overlay. Class is added/removed
+   from a useEffect tied to isLoading, so it cannot stick. */
+body.preloader-active {
+  overflow: hidden;
+}
 
 .prevent-select {
   -webkit-touch-callout: none;

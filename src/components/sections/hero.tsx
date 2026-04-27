@@ -6,6 +6,7 @@ import { VerticalLines } from "@/components/lines";
 import { HackerText, StaggeredText } from "@/components/text";
 import { Button } from "@/components/ui/button";
 import { useCustomCursor } from "@/context/custom-cursor-context";
+import { usePreloader } from "@/context/preloader-context";
 import { scrollToSection } from "@/lib/utils";
 import { useRef } from "react";
 
@@ -26,6 +27,11 @@ const tagVariants = {
 const Hero = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.5 });
+  const { isReady } = usePreloader();
+  // Hero is in the initial viewport, so its useInView fires while the preloader
+  // is still covering the page. Gate on isReady so the entrance animation
+  // actually plays for the user, not behind the curtain.
+  const canAnimate = isInView && isReady;
   const { setCursorText, setCursorVariant } = useCustomCursor();
 
   const tags = [
@@ -46,7 +52,7 @@ const Hero = () => {
 
   const anim = (variants: Variants) => ({
     initial: "initial",
-    animate: isInView ? "animate" : "initial",
+    animate: canAnimate ? "animate" : "initial",
     exit: "exit",
     variants,
   });

@@ -2,7 +2,9 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRef } from "react";
 
+import Preloader from "@/components/sections/preloader";
 import CustomCursorProvider from "@/context/custom-cursor-context";
+import { PreloaderProvider } from "@/context/preloader-context";
 import { supplyMono } from "@/fonts";
 import "@/styles/globals.css";
 
@@ -47,9 +49,12 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
 
       <main className={`${supplyMono.className} relative`} ref={ref}>
-        <CustomCursorProvider containerRef={ref}>
-          <Component {...pageProps} />
-        </CustomCursorProvider>
+        <PreloaderProvider>
+          <Preloader />
+          <CustomCursorProvider containerRef={ref}>
+            <Component {...pageProps} />
+          </CustomCursorProvider>
+        </PreloaderProvider>
       </main>
     </>
   );

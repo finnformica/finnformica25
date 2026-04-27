@@ -12,6 +12,7 @@
   z-index: 9999;
   pointer-events: none;
   background-color: transparent;
+  cursor: wait;
 }
 
 .row {
@@ -31,11 +32,11 @@
   font-size: var(--preloader-f);
 
   z-index: 999;
-  flex: 1;
+  flex: 0;
   line-height: 0.75;
-  margin: auto;
   color: var(--foreground);
   text-align: center;
+  position: relative;
   transform: scaleX(var(--scale, 1)) translateX(2%);
   animation: glitch-p 11s infinite alternate;
 }
@@ -46,8 +47,7 @@
   --left: 0; /* offset from left [0.001 - 1] */
   --v-height: 30%; /* visible part */
 
-  --n-tenth: calc(var(--preloader-f-size) * 0.1 * var(--top));
-  --t-cut: calc(var(--n-tenth) / var(--preloader-f-size) * 100%);
+  --t-cut: calc(var(--top) * 10%);
   --b-cut: calc(var(--t-cut) + var(--v-height));
 
   content: attr(data-text);
@@ -79,6 +79,22 @@
 }
 .glitch::after {
   animation: glitch-a 3.1s infinite alternate;
+}
+
+/* Small counter pinned to the bottom-center. Tabular-nums keeps the digits
+   from jittering as they tick. */
+.counter {
+  position: absolute;
+  bottom: clamp(24px, 5vh, 48px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-supply-mono), ui-monospace, monospace;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3em;
+  color: var(--foreground);
+  opacity: 0.55;
+  white-space: nowrap;
 }
 
 @keyframes glitch-p {
