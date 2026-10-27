@@ -14,7 +14,7 @@ import "@/styles/globals.css";
 // deployments.
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.finnformica.com";
-const OG_IMAGE_URL = `${SITE_URL}/api/og`;
+const OG_IMAGE_URL = `${SITE_URL}/og.png`;
 
 export default function App({ Component, pageProps }: AppProps) {
   const ref = useRef<HTMLDivElement>(null);

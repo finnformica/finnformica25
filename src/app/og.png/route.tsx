@@ -1,35 +1,27 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import type { NextRequest } from "next/server";
 
-export const config = { runtime: "edge" };
+// Rendered once at build time. With `output: "export"` this file becomes
+// out/og.png, so the social preview image is a plain static asset.
+export const dynamic = "force-static";
 
 const FG = "#fcfcfd";
 const BG = "#16171a";
 const MUTED = "#7a7d85";
 
-export default async function handler(req: NextRequest) {
-  const { origin } = new URL(req.url);
+const publicFile = (path: string) =>
+  readFile(join(process.cwd(), "public", path));
 
+export async function GET() {
   const [outerSansBlack, supplyMono, logoBuffer] = await Promise.all([
-    fetch(new URL("/fonts/OuterSansAlt-Black.otf", origin)).then((r) =>
-      r.arrayBuffer(),
-    ),
-    fetch(new URL("/fonts/PPSupplyMono-Regular.otf", origin)).then((r) =>
-      r.arrayBuffer(),
-    ),
-    fetch(new URL("/images/finnformica-logo.png", origin)).then((r) =>
-      r.arrayBuffer(),
-    ),
+    publicFile("fonts/OuterSansAlt-Black.otf"),
+    publicFile("fonts/PPSupplyMono-Regular.otf"),
+    publicFile("images/finnformica-logo.png"),
   ]);
 
-  // Satori needs an embeddable URL for <img>. Convert to a data URL using
-  // Web-standard btoa() so this stays portable across edge / node runtimes.
-  const bytes = new Uint8Array(logoBuffer);
-  let binary = "";
-  for (let i = 0; i < bytes.byteLength; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  const logoDataUrl = `data:image/png;base64,${btoa(binary)}`;
+  // Satori needs an embeddable URL for <img>, so inline the logo as a data URL.
+  const logoDataUrl = `data:image/png;base64,${logoBuffer.toString("base64")}`;
 
   return new ImageResponse(
     (
